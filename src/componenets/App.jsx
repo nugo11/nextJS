@@ -1,13 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useMovies } from "../componenets/MoviesContext";
-import Link from 'next/link'; 
+import Link from "next/link";
 import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
-import useWindowDimensions from "../componenets/useWindowDimensions";
-import { Helmet } from "react-helmet";
-import { ArrowL, PlayIcon } from "../componenets/icons/icons";
+import { ArrowL, PlayIcon } from "./icons/icons";
 
 function getRatingclassName(rating) {
   if (Number(rating) < 6) return "red";
@@ -16,61 +12,13 @@ function getRatingclassName(rating) {
   return "";
 }
 
-function App() {
-  const [tab, setTab] = useState("tab-1");
-
-  const { width } = useWindowDimensions();
-  const [perPage, setPerPage] = useState(6);
-
-  useEffect(() => {
-    if (width < 570) {
-      setPerPage(2);
-    } else if (width < 991) {
-      setPerPage(3);
-    } else if (width < 1000) {
-      setPerPage(4);
-    } else if (width < 1200) {
-      setPerPage(5);
-    } else {
-      setPerPage(6);
-    }
-  }, [width]);
-
+function App({ initialData = {} }) {
   const handleTabClick = (tabId) => {
     setTab(tabId);
   };
 
-  const { movies, ser, turk, anime, animation, movSlider } = useMovies();
   return (
     <>
-      <Helmet>
-        <meta name="robots" content="index,follow,all" />
-        <base href={window.location.href} />
-        <meta name="application-name" content="FILMEBI.IN" />
-        <meta
-          name="title"
-          content="Filmebi.in - ფილმები ქართულად | Filmebi Qartulad | სერიალები ქართულად | Serialebi Qartulad"
-        />
-        <meta
-          name="description"
-          content="filmebi.in - ახალი ფილმები და სერიალები ქართულად უფასოდ, უახლესი თურქული სერიალები ქართულად, axali filmebi da serialebi qartulad ufasod, pilmebi qartulad online, uaxlesi turquli serialebi qartulad"
-        />
-        <meta
-          name="keywords"
-          content="ფილმები, სერიალები, ქართულად, თრეილერები, მსახიობები, ონლაინ, ყურება, უფასოდ, თურქული, უახლესი, Filmebi.in, მუვიჯი, filmebi, pilmebi, serialebi, qartulad, kartulad, online, treilerebi, msaxiobebi, yureba, ufasod, turquli, uaxlesi, Filmebi.in, gemovie, jimuvi, movie.ge, moviege, muviji, gemovies, imovie.ge"
-        />
-        <meta
-          property="og:title"
-          content="ფილმები ქართულად | Filmebi Qartulad | სერიალები ქართულად | Serialebi Qartulad - Filmebi.in"
-        />
-        <meta
-          property="og:description"
-          content="Filmebi.in - ახალი ფილმები და სერიალები ქართულად უფასოდ, უახლესი თურქული სერიალები ქართულად, axali filmebi da serialebi qartulad ufasod, pilmebi qartulad online, uaxlesi turquli serialebi qartulad"
-        />
-        <meta property="og:image" content="/assets/img/cover.webp" />
-        <meta property="og:url" content="https://Filmebi.in/" />
-      </Helmet>
-
       <div className="fullbg-pattern"></div>
       <section className="home" id="mineslider">
         <div className="container">
@@ -92,10 +40,21 @@ function App() {
                 className="home__carousel splide splide--home"
                 aria-label="ფილმები ქართულად"
                 options={{
-                  perPage: perPage,
+                  perPage: 6, 
                   rewind: true,
                   gap: "24px",
                   pagination: false,
+                  breakpoints: {
+                    1200: {
+                     perPage: 4,
+                    },
+                    992: {
+                      perPage: 3,
+                    },
+                    576: {
+                      perPage: 2,
+                    },
+                  },
                 }}
               >
                 <div className="splide__arrows">
@@ -115,8 +74,8 @@ function App() {
                   </button>
                 </div>
                 <SplideTrack>
-                  {movSlider &&
-                    movSlider
+                  {initialData.movSlider &&
+                    initialData.movSlider
                       .filter((i) => !i.genre.includes("სერიალი"))
 
                       .map((item) => {
@@ -134,7 +93,6 @@ function App() {
                                   <Link
                                     key={item.detailLink}
                                     href={`/detail/${item.detailLink}`}
-                                    state={{ movies }}
                                     className="item__play"
                                   >
                                     <PlayIcon />
@@ -192,7 +150,6 @@ function App() {
                                     <Link
                                       key={item.detailLink}
                                       href={`/detail/${item.detailLink}`}
-                                      state={{ movies }}
                                     >
                                       {item.title_geo}
                                     </Link>
@@ -201,7 +158,6 @@ function App() {
                                     <Link
                                       key={item.detailLink}
                                       href={`/detail/${item.detailLink}`}
-                                      state={{ movies }}
                                     >
                                       {item.title_en}
                                     </Link>
@@ -250,10 +206,21 @@ function App() {
                 className="section__carousel splide splide--content"
                 aria-label="სერიალები ქართულად"
                 options={{
-                  perPage: perPage,
+                  perPage: 6,
                   rewind: true,
                   gap: "24px",
                   pagination: false,
+                  breakpoints: {
+                    1200: {
+                     perPage: 4,
+                    },
+                    992: {
+                      perPage: 3,
+                    },
+                    576: {
+                      perPage: 2,
+                    },
+                  },
                 }}
               >
                 <div className="splide__arrows">
@@ -274,7 +241,7 @@ function App() {
                 </div>
 
                 <SplideTrack>
-                  {ser
+                  {initialData.ser
                     .filter((item) => item.genre.includes("სერიალი"))
 
                     .map((item) => {
@@ -295,7 +262,6 @@ function App() {
                                 <Link
                                   key={item.detailLink}
                                   href={`/detail/${item.detailLink}`}
-                                  state={{ ser }}
                                   className="item__play"
                                 >
                                   <PlayIcon />
@@ -349,7 +315,6 @@ function App() {
                                   <Link
                                     key={item.detailLink}
                                     href={`/detail/${item.detailLink}`}
-                                    state={{ ser }}
                                   >
                                     {item.title_geo}
                                   </Link>
@@ -358,7 +323,6 @@ function App() {
                                   <Link
                                     key={item.detailLink}
                                     href={`/detail/${item.detailLink}`}
-                                    state={{ ser }}
                                   >
                                     {item.title_en}
                                   </Link>
@@ -398,7 +362,6 @@ function App() {
                     <li className="nav-item" role="presentation">
                       <button
                         id="1-tab"
-                        className={tab === "tab-1" ? "active" : ""}
                         onClick={() => handleTabClick("tab-1")}
                       >
                         თურქული სერიალები
@@ -407,7 +370,6 @@ function App() {
                     <li className="nav-item" role="presentation">
                       <button
                         id="2-tab"
-                        className={tab === "tab-2" ? "active" : ""}
                         onClick={() => handleTabClick("tab-2")}
                       >
                         ანიმეები
@@ -415,15 +377,7 @@ function App() {
                     </li>
                   </ul>
                   <ul className="viewallul">
-                    <Link
-                      href={
-                        tab === "tab-1"
-                          ? "serial?genre=თურქული%20სერიალები"
-                          : "/serial?genre=სერიალი%2Cანიმაციური"
-                      }
-                    >
-                      ყველას ნახვა
-                    </Link>
+                    <Link href={"#"}>ყველას ნახვა</Link>
                   </ul>
                 </div>
               </div>
@@ -434,16 +388,13 @@ function App() {
         <div className="container">
           <div className="tab-content">
             <div
-              className={`tab-pane fade ${
-                tab === "tab-1" ? "show active" : ""
-              }`}
               id="tab-1"
               role="tabpanel"
               aria-labelledby="1-tab"
               tabIndex="0"
             >
               <div className="row">
-                {turk.map((item) => (
+                {initialData.turk.map((item) => (
                   <div
                     key={item.detailLink}
                     className="col-6 col-sm-4 col-lg-3 col-xl-2"
@@ -459,7 +410,6 @@ function App() {
                         <Link
                           key={item.detailLink}
                           href={`/detail/${item.detailLink}`}
-                          state={{ turk }}
                           className="item__play"
                         >
                           <PlayIcon />
@@ -511,7 +461,6 @@ function App() {
                           <Link
                             key={item.detailLink}
                             href={`/detail/${item.detailLink}`}
-                            state={{ turk }}
                           >
                             {item.title_geo}
                           </Link>
@@ -520,7 +469,6 @@ function App() {
                           <Link
                             key={item.detailLink}
                             href={`/detail/${item.detailLink}`}
-                            state={{ turk }}
                           >
                             {item.title_en}
                           </Link>
@@ -532,16 +480,13 @@ function App() {
               </div>
             </div>
             <div
-              className={`tab-pane fade ${
-                tab === "tab-2" ? "show active" : ""
-              }`}
               id="tab-2"
               role="tabpanel"
               aria-labelledby="2-tab"
               tabIndex="0"
             >
               <div className="row">
-                {anime.map((item) => (
+                {initialData.anime.map((item) => (
                   <div
                     key={item.detailLink}
                     className="col-6 col-sm-4 col-lg-3 col-xl-2"
@@ -557,7 +502,6 @@ function App() {
                         <Link
                           key={item.detailLink}
                           href={`/detail/${item.detailLink}`}
-                          state={{ anime }}
                           className="item__play"
                         >
                           <PlayIcon />
@@ -609,7 +553,6 @@ function App() {
                           <Link
                             key={item.detailLink}
                             href={`/detail/${item.detailLink}`}
-                            state={{ anime }}
                           >
                             {item.title_geo}
                           </Link>
@@ -618,7 +561,6 @@ function App() {
                           <Link
                             key={item.detailLink}
                             href={`/detail/${item.detailLink}`}
-                            state={{ anime }}
                           >
                             {item.title_en}
                           </Link>
@@ -664,10 +606,21 @@ function App() {
                 aria-label="ანიმაციური ფილმები ქართულად"
                 className="section__carousel splide splide--content"
                 options={{
-                  perPage: perPage,
+                  perPage: 6,
                   rewind: true,
                   gap: "24px",
                   pagination: false,
+                  breakpoints: {
+                    1200: {
+                     perPage: 4,
+                    },
+                    992: {
+                      perPage: 3,
+                    },
+                    576: {
+                      perPage: 2,
+                    },
+                  },
                 }}
               >
                 <div className="splide__arrows">
@@ -688,7 +641,7 @@ function App() {
                 </div>
 
                 <SplideTrack>
-                  {animation
+                  {initialData.animation
                     .filter((io) => !io.genre.includes("სერიალი"))
 
                     .map((item) => {
@@ -709,7 +662,6 @@ function App() {
                                 <Link
                                   key={item.detailLink}
                                   href={`/detail/${item.detailLink}`}
-                                  state={{ animation }}
                                   className="item__play"
                                 >
                                   <PlayIcon />
@@ -763,7 +715,6 @@ function App() {
                                   <Link
                                     key={item.detailLink}
                                     href={`/detail/${item.detailLink}`}
-                                    state={{ animation }}
                                   >
                                     {item.title_geo}
                                   </Link>
@@ -772,7 +723,6 @@ function App() {
                                   <Link
                                     key={item.detailLink}
                                     href={`/detail/${item.detailLink}`}
-                                    state={{ animation }}
                                   >
                                     {item.title_en}
                                   </Link>
@@ -814,10 +764,21 @@ function App() {
                 aria-label="ტელევიზია"
                 className="section__carousel splide splide--content"
                 options={{
-                  perPage: 5,
+                  perPage: 6,
                   rewind: true,
                   gap: "24px",
                   pagination: false,
+                  breakpoints: {
+                    1200: {
+                     perPage: 4,
+                    },
+                    992: {
+                      perPage: 3,
+                    },
+                    576: {
+                      perPage: 2,
+                    },
+                  },
                 }}
               >
                 <div className="splide__arrows">

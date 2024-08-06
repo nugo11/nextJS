@@ -9,8 +9,11 @@ import { auth } from "../firebase";
 import { useAuth } from "../componenets/login/authcontext";
 import SearchIcon from "./icons/icons";
 import logo from "../assets/img/logo.webp";
+import { usePathname } from 'next/navigation';
 
 export default function Header() {
+  const location = usePathname();
+
   const [change, setChange] = useState("");
   const router = useRouter();
 
@@ -41,7 +44,7 @@ export default function Header() {
   return (
     <>
       <Helmet>
-        <link rel="canonical" href={window.location.href} />
+        <link rel="canonical" href={location.href} />
         <link
           rel="search"
           type="application/opensearchdescription+xml"

@@ -1,7 +1,9 @@
-import Appi from "./App";
+import App from '../componenets/App';
+import { fetchMoviesData } from '../componenets/fetchMoviesData'; 
 
-export default function Home() {
+export default async function HomePage() {
+  const initialData = await fetchMoviesData();
   return (
-    <Appi />
+      <App initialData={initialData} />
   );
 }
