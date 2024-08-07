@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import Link from "next/link";
 import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
@@ -12,7 +12,7 @@ function getRatingclassName(rating) {
   return "";
 }
 
-function App({ initialData = {} }) {
+function App({ ser, turk, anime, animation, movSlider }) {
   const handleTabClick = (tabId) => {
     setTab(tabId);
   };
@@ -35,141 +35,7 @@ function App({ initialData = {} }) {
             </div>
 
             <div className="col-12">
-              <Splide
-                hasTrack={false}
-                className="home__carousel splide splide--home"
-                aria-label="ფილმები ქართულად"
-                options={{
-                  perPage: 6, 
-                  rewind: true,
-                  gap: "24px",
-                  pagination: false,
-                  breakpoints: {
-                    1200: {
-                     perPage: 4,
-                    },
-                    992: {
-                      perPage: 3,
-                    },
-                    576: {
-                      perPage: 2,
-                    },
-                  },
-                }}
-              >
-                <div className="splide__arrows">
-                  <button
-                    title="arrow"
-                    className="splide__arrow splide__arrow--prev"
-                    type="button"
-                  >
-                    <ArrowL color="#fff" height={18} width={18} boo={false} />
-                  </button>
-                  <button
-                    title="arrow"
-                    className="splide__arrow splide__arrow--next"
-                    type="button"
-                  >
-                    <ArrowL color="#fff" height={18} width={18} boo={true} />
-                  </button>
-                </div>
-                <SplideTrack>
-                  {initialData.movSlider &&
-                    initialData.movSlider
-                      .filter((i) => !i.genre.includes("სერიალი"))
-
-                      .map((item) => {
-                        return (
-                          <>
-                            <SplideSlide>
-                              <div className="item item--hero">
-                                <div className="item__cover">
-                                  <img
-                                    src={`/mov/${item.poster}`}
-                                    alt={`${item.title_geo} / ${item.title_en} ქართულად`}
-                                    loading="lazy"
-                                  />
-
-                                  <Link
-                                    key={item.detailLink}
-                                    href={`/detail/${item.detailLink}`}
-                                    className="item__play"
-                                  >
-                                    <PlayIcon />
-                                  </Link>
-                                  <span
-                                    className={`item__rate item__rate--${getRatingclassName(
-                                      item.imdb
-                                    )}`}
-                                  >
-                                    {item.imdb}
-                                  </span>
-                                  <div className="item__favorite" type="button">
-                                    HD
-                                  </div>
-                                  <div className="item__lang" type="button">
-                                    <ul>
-                                      <li
-                                        style={{
-                                          color: item.country.includes(
-                                            "ქართულად"
-                                          )
-                                            ? "white"
-                                            : "gray",
-                                        }}
-                                      >
-                                        GEO
-                                      </li>
-                                      <li
-                                        style={{
-                                          color: item.country.includes(
-                                            "ინგლისურად"
-                                          )
-                                            ? "white"
-                                            : "gray",
-                                        }}
-                                      >
-                                        ENG
-                                      </li>
-                                      <li
-                                        style={{
-                                          color: item.country.includes(
-                                            "რუსულად"
-                                          )
-                                            ? "white"
-                                            : "gray",
-                                        }}
-                                      >
-                                        RUS
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                                <div className="item__content">
-                                  <h3 className="item__title">
-                                    <Link
-                                      key={item.detailLink}
-                                      href={`/detail/${item.detailLink}`}
-                                    >
-                                      {item.title_geo}
-                                    </Link>
-                                  </h3>
-                                  <span className="item__category">
-                                    <Link
-                                      key={item.detailLink}
-                                      href={`/detail/${item.detailLink}`}
-                                    >
-                                      {item.title_en}
-                                    </Link>
-                                  </span>
-                                </div>
-                              </div>
-                            </SplideSlide>
-                          </>
-                        );
-                      })}
-                </SplideTrack>
-              </Splide>
+              <SplideSlide title="ფილმები ქართულად" per={6}  rendered='movSlide' boo={true}/>
             </div>
           </div>
         </div>
@@ -241,9 +107,7 @@ function App({ initialData = {} }) {
                 </div>
 
                 <SplideTrack>
-                  {initialData.ser
-                    .filter((item) => item.genre.includes("სერიალი"))
-
+                  {ser
                     .map((item) => {
                       return (
                         <>
@@ -394,7 +258,7 @@ function App({ initialData = {} }) {
               tabIndex="0"
             >
               <div className="row">
-                {initialData.turk.map((item) => (
+                {turk.map((item) => (
                   <div
                     key={item.detailLink}
                     className="col-6 col-sm-4 col-lg-3 col-xl-2"
@@ -486,7 +350,7 @@ function App({ initialData = {} }) {
               tabIndex="0"
             >
               <div className="row">
-                {initialData.anime.map((item) => (
+                {anime.map((item) => (
                   <div
                     key={item.detailLink}
                     className="col-6 col-sm-4 col-lg-3 col-xl-2"
@@ -641,9 +505,8 @@ function App({ initialData = {} }) {
                 </div>
 
                 <SplideTrack>
-                  {initialData.animation
+                  {animation
                     .filter((io) => !io.genre.includes("სერიალი"))
-
                     .map((item) => {
                       return (
                         <>
