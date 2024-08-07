@@ -1,18 +1,11 @@
-'use client'
-
+"use client"
+import { useState } from "react";
 import Link from "next/link";
-import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
-import "@splidejs/react-splide/css";
-import { ArrowL, PlayIcon } from "./icons/icons";
+import SplideSlider, { GridMov, TvCarousel } from "./slider/SplideSlider";
 
-function getRatingclassName(rating) {
-  if (Number(rating) < 6) return "red";
-  if (Number(rating) < 7) return "yellow";
-  if (Number(rating) >= 7) return "green";
-  return "";
-}
+function App() {
+  const [tab, setTab] = useState("tab-1");
 
-function App({ ser, turk, anime, animation, movSlider }) {
   const handleTabClick = (tabId) => {
     setTab(tabId);
   };
@@ -35,7 +28,7 @@ function App({ ser, turk, anime, animation, movSlider }) {
             </div>
 
             <div className="col-12">
-              <SplideSlide title="ფილმები ქართულად" per={6}  rendered='movSlide' boo={true}/>
+              <SplideSlider title="ფილმები ქართულად" per={6}  rendered={'movSlider'} boo={true}/>
             </div>
           </div>
         </div>
@@ -67,138 +60,7 @@ function App({ ser, turk, anime, animation, movSlider }) {
 
             {/*  carousel  */}
             <div className="col-12">
-              <Splide
-                hasTrack={false}
-                className="section__carousel splide splide--content"
-                aria-label="სერიალები ქართულად"
-                options={{
-                  perPage: 6,
-                  rewind: true,
-                  gap: "24px",
-                  pagination: false,
-                  breakpoints: {
-                    1200: {
-                     perPage: 4,
-                    },
-                    992: {
-                      perPage: 3,
-                    },
-                    576: {
-                      perPage: 2,
-                    },
-                  },
-                }}
-              >
-                <div className="splide__arrows">
-                  <button
-                    title="arrow"
-                    className="splide__arrow splide__arrow--prev"
-                    type="button"
-                  >
-                    <ArrowL color="#fff" height={18} width={18} boo={false} />
-                  </button>
-                  <button
-                    title="arrow"
-                    className="splide__arrow splide__arrow--next"
-                    type="button"
-                  >
-                    <ArrowL color="#fff" height={18} width={18} boo={true} />
-                  </button>
-                </div>
-
-                <SplideTrack>
-                  {ser
-                    .map((item) => {
-                      return (
-                        <>
-                          <li
-                            className="splide__slide"
-                            key={`${item.detailLink}${item.imdb}`}
-                          >
-                            <div className="item item--hero">
-                              <div className="item__cover">
-                                {" "}
-                                <img
-                                  src={`/mov/${item.poster}`}
-                                  alt={`${item.title_geo} / ${item.title_en} ქართულად`}
-                                  loading="lazy"
-                                />
-                                <Link
-                                  key={item.detailLink}
-                                  href={`/detail/${item.detailLink}`}
-                                  className="item__play"
-                                >
-                                  <PlayIcon />
-                                </Link>
-                                <span
-                                  className={`item__rate item__rate--${getRatingclassName(
-                                    item.imdb
-                                  )}`}
-                                >
-                                  {item.imdb}
-                                </span>
-                                <div className="item__favorite" type="button">
-                                  HD
-                                </div>
-                                <div className="item__lang" type="button">
-                                  <ul>
-                                    <li
-                                      style={{
-                                        color: item.country.includes("ქართულად")
-                                          ? "white"
-                                          : "gray",
-                                      }}
-                                    >
-                                      GEO
-                                    </li>
-                                    <li
-                                      style={{
-                                        color: item.country.includes(
-                                          "ინგლისურად"
-                                        )
-                                          ? "white"
-                                          : "gray",
-                                      }}
-                                    >
-                                      ENG
-                                    </li>
-                                    <li
-                                      style={{
-                                        color: item.country.includes("რუსულად")
-                                          ? "white"
-                                          : "gray",
-                                      }}
-                                    >
-                                      RUS
-                                    </li>
-                                  </ul>
-                                </div>
-                              </div>
-                              <div className="item__content">
-                                <h3 className="item__title">
-                                  <Link
-                                    key={item.detailLink}
-                                    href={`/detail/${item.detailLink}`}
-                                  >
-                                    {item.title_geo}
-                                  </Link>
-                                </h3>
-                                <span className="item__category">
-                                  <Link
-                                    key={item.detailLink}
-                                    href={`/detail/${item.detailLink}`}
-                                  >
-                                    {item.title_en}
-                                  </Link>
-                                </span>
-                              </div>
-                            </div>
-                          </li>
-                        </>
-                      );
-                    })}
-                </SplideTrack>
-              </Splide>
+            <SplideSlider title="სერიალები ქართულად" per={6}  rendered='ser' boo={false}/>
             </div>
             {/*  end carousel  */}
           </div>
@@ -224,8 +86,9 @@ function App({ ser, turk, anime, animation, movSlider }) {
                     role="tablist"
                   >
                     <li className="nav-item" role="presentation">
-                      <button
+                    <button
                         id="1-tab"
+                        className={tab === "tab-1" ? "active" : ""}
                         onClick={() => handleTabClick("tab-1")}
                       >
                         თურქული სერიალები
@@ -234,6 +97,7 @@ function App({ ser, turk, anime, animation, movSlider }) {
                     <li className="nav-item" role="presentation">
                       <button
                         id="2-tab"
+                        className={tab === "tab-2" ? "active" : ""}
                         onClick={() => handleTabClick("tab-2")}
                       >
                         ანიმეები
@@ -241,7 +105,15 @@ function App({ ser, turk, anime, animation, movSlider }) {
                     </li>
                   </ul>
                   <ul className="viewallul">
-                    <Link href={"#"}>ყველას ნახვა</Link>
+                  <Link
+                      href={
+                        tab === "tab-1"
+                          ? "serial?genre=თურქული%20სერიალები"
+                          : "/serial?genre=სერიალი%2Cანიმაციური"
+                      }
+                    >
+                      ყველას ნახვა
+                    </Link>
                   </ul>
                 </div>
               </div>
@@ -252,187 +124,29 @@ function App({ ser, turk, anime, animation, movSlider }) {
         <div className="container">
           <div className="tab-content">
             <div
+             className={`tab-pane fade ${
+              tab === "tab-1" ? "show active" : ""
+            }`}
               id="tab-1"
               role="tabpanel"
               aria-labelledby="1-tab"
               tabIndex="0"
             >
               <div className="row">
-                {turk.map((item) => (
-                  <div
-                    key={item.detailLink}
-                    className="col-6 col-sm-4 col-lg-3 col-xl-2"
-                  >
-                    <div className="item">
-                      <div className="item__cover">
-                        {" "}
-                        <img
-                          src={`/mov/${item.poster}`}
-                          alt={`${item.title_geo} / ${item.title_en} ქართულად`}
-                          loading="lazy"
-                        />
-                        <Link
-                          key={item.detailLink}
-                          href={`/detail/${item.detailLink}`}
-                          className="item__play"
-                        >
-                          <PlayIcon />
-                        </Link>
-                        <span
-                          className={`item__rate item__rate--${getRatingclassName(
-                            item.imdb
-                          )}`}
-                        >
-                          {item.imdb}
-                        </span>
-                        <div className="item__favorite" type="button">
-                          HD
-                        </div>
-                        <div className="item__lang" type="button">
-                          <ul>
-                            <li
-                              style={{
-                                color: item.country.includes("ქართულად")
-                                  ? "white"
-                                  : "gray",
-                              }}
-                            >
-                              GEO
-                            </li>
-                            <li
-                              style={{
-                                color: item.country.includes("ინგლისურად")
-                                  ? "white"
-                                  : "gray",
-                              }}
-                            >
-                              ENG
-                            </li>
-                            <li
-                              style={{
-                                color: item.country.includes("რუსულად")
-                                  ? "white"
-                                  : "gray",
-                              }}
-                            >
-                              RUS
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                      <div className="item__content">
-                        <h3 className="item__title">
-                          <Link
-                            key={item.detailLink}
-                            href={`/detail/${item.detailLink}`}
-                          >
-                            {item.title_geo}
-                          </Link>
-                        </h3>
-                        <span className="item__category">
-                          <Link
-                            key={item.detailLink}
-                            href={`/detail/${item.detailLink}`}
-                          >
-                            {item.title_en}
-                          </Link>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+                <GridMov rendered={'turk'} />
               </div>
             </div>
             <div
+            className={`tab-pane fade ${
+              tab === "tab-2" ? "show active" : ""
+            }`}
               id="tab-2"
               role="tabpanel"
               aria-labelledby="2-tab"
               tabIndex="0"
             >
               <div className="row">
-                {anime.map((item) => (
-                  <div
-                    key={item.detailLink}
-                    className="col-6 col-sm-4 col-lg-3 col-xl-2"
-                  >
-                    <div className="item">
-                      <div className="item__cover">
-                        {" "}
-                        <img
-                          src={`/mov/${item.poster}`}
-                          alt={`${item.title_geo} / ${item.title_en} ქართულად`}
-                          loading="lazy"
-                        />
-                        <Link
-                          key={item.detailLink}
-                          href={`/detail/${item.detailLink}`}
-                          className="item__play"
-                        >
-                          <PlayIcon />
-                        </Link>
-                        <span
-                          className={`item__rate item__rate--${getRatingclassName(
-                            item.imdb
-                          )}`}
-                        >
-                          {item.imdb}
-                        </span>
-                        <div className="item__favorite" type="button">
-                          HD
-                        </div>
-                        <div className="item__lang" type="button">
-                          <ul>
-                            <li
-                              style={{
-                                color: item.country.includes("ქართულად")
-                                  ? "white"
-                                  : "gray",
-                              }}
-                            >
-                              GEO
-                            </li>
-                            <li
-                              style={{
-                                color: item.country.includes("ინგლისურად")
-                                  ? "white"
-                                  : "gray",
-                              }}
-                            >
-                              ENG
-                            </li>
-                            <li
-                              style={{
-                                color: item.country.includes("რუსულად")
-                                  ? "white"
-                                  : "gray",
-                              }}
-                            >
-                              RUS
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                      <div className="item__content">
-                        <h3 className="item__title">
-                          <Link
-                            key={item.detailLink}
-                            href={`/detail/${item.detailLink}`}
-                          >
-                            {item.title_geo}
-                          </Link>
-                        </h3>
-                        <span className="item__category">
-                          <Link
-                            key={item.detailLink}
-                            href={`/detail/${item.detailLink}`}
-                          >
-                            {item.title_en}
-                          </Link>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+              <GridMov rendered={'anime'} />
               </div>
             </div>
           </div>
@@ -465,139 +179,8 @@ function App({ ser, turk, anime, animation, movSlider }) {
 
             {/*  carousel  */}
             <div className="col-12">
-              <Splide
-                hasTrack={false}
-                aria-label="ანიმაციური ფილმები ქართულად"
-                className="section__carousel splide splide--content"
-                options={{
-                  perPage: 6,
-                  rewind: true,
-                  gap: "24px",
-                  pagination: false,
-                  breakpoints: {
-                    1200: {
-                     perPage: 4,
-                    },
-                    992: {
-                      perPage: 3,
-                    },
-                    576: {
-                      perPage: 2,
-                    },
-                  },
-                }}
-              >
-                <div className="splide__arrows">
-                  <button
-                    title="arrow"
-                    className="splide__arrow splide__arrow--prev"
-                    type="button"
-                  >
-                    <ArrowL color="#fff" height={18} width={18} boo={false} />
-                  </button>
-                  <button
-                    title="arrow"
-                    className="splide__arrow splide__arrow--next"
-                    type="button"
-                  >
-                    <ArrowL color="#fff" height={18} width={18} boo={true} />
-                  </button>
-                </div>
+            <SplideSlider title="ანიმაციური ქართულად" per={6}  rendered='animation' boo={true}/>
 
-                <SplideTrack>
-                  {animation
-                    .filter((io) => !io.genre.includes("სერიალი"))
-                    .map((item) => {
-                      return (
-                        <>
-                          <li
-                            className="splide__slide"
-                            key={`${item.detailLink}${item.imdb}`}
-                          >
-                            <div className="item item--hero">
-                              <div className="item__cover">
-                                {" "}
-                                <img
-                                  src={`/mov/${item.poster}`}
-                                  alt={`${item.title_geo} / ${item.title_en} ქართულად`}
-                                  loading="lazy"
-                                />
-                                <Link
-                                  key={item.detailLink}
-                                  href={`/detail/${item.detailLink}`}
-                                  className="item__play"
-                                >
-                                  <PlayIcon />
-                                </Link>
-                                <span
-                                  className={`item__rate item__rate--${getRatingclassName(
-                                    item.imdb
-                                  )}`}
-                                >
-                                  {item.imdb}
-                                </span>
-                                <div className="item__favorite" type="button">
-                                  HD
-                                </div>
-                                <div className="item__lang" type="button">
-                                  <ul>
-                                    <li
-                                      style={{
-                                        color: item.country.includes("ქართულად")
-                                          ? "white"
-                                          : "gray",
-                                      }}
-                                    >
-                                      GEO
-                                    </li>
-                                    <li
-                                      style={{
-                                        color: item.country.includes(
-                                          "ინგლისურად"
-                                        )
-                                          ? "white"
-                                          : "gray",
-                                      }}
-                                    >
-                                      ENG
-                                    </li>
-                                    <li
-                                      style={{
-                                        color: item.country.includes("რუსულად")
-                                          ? "white"
-                                          : "gray",
-                                      }}
-                                    >
-                                      RUS
-                                    </li>
-                                  </ul>
-                                </div>
-                              </div>
-                              <div className="item__content">
-                                <h3 className="item__title">
-                                  <Link
-                                    key={item.detailLink}
-                                    href={`/detail/${item.detailLink}`}
-                                  >
-                                    {item.title_geo}
-                                  </Link>
-                                </h3>
-                                <span className="item__category">
-                                  <Link
-                                    key={item.detailLink}
-                                    href={`/detail/${item.detailLink}`}
-                                  >
-                                    {item.title_en}
-                                  </Link>
-                                </span>
-                              </div>
-                            </div>
-                          </li>
-                        </>
-                      );
-                    })}
-                </SplideTrack>
-              </Splide>
             </div>
             {/*  end carousel  */}
           </div>
@@ -622,174 +205,7 @@ function App({ ser, turk, anime, animation, movSlider }) {
 
             {/*  carousel  */}
             <div className="col-12">
-              <Splide
-                hasTrack={false}
-                aria-label="ტელევიზია"
-                className="section__carousel splide splide--content"
-                options={{
-                  perPage: 6,
-                  rewind: true,
-                  gap: "24px",
-                  pagination: false,
-                  breakpoints: {
-                    1200: {
-                     perPage: 4,
-                    },
-                    992: {
-                      perPage: 3,
-                    },
-                    576: {
-                      perPage: 2,
-                    },
-                  },
-                }}
-              >
-                <div className="splide__arrows">
-                  <button
-                    title="arrow"
-                    className="splide__arrow splide__arrow--prev"
-                    type="button"
-                  >
-                    <ArrowL color="#fff" height={18} width={18} boo={false} />
-                  </button>
-                  <button
-                    title="arrow"
-                    className="splide__arrow splide__arrow--next"
-                    type="button"
-                  >
-                    <ArrowL color="#fff" height={18} width={18} boo={true} />
-                  </button>
-                </div>
-
-                <SplideTrack>
-                  <SplideSlide>
-                    <div className="item item--hero" id="tvcorrect">
-                      <div className="item__cover" id="tv_id">
-                        {" "}
-                        <Link href="/tv">
-                          <img
-                            src="/assets/img/tv/tv-01.png"
-                            alt="ტელევიზია"
-                            loading="lazy"
-                          />
-                        </Link>
-                      </div>
-                    </div>
-                  </SplideSlide>
-                  <SplideSlide>
-                    <div className="item item--hero" id="tvcorrect">
-                      <div className="item__cover" id="tv_id">
-                        {" "}
-                        <Link href="/tv">
-                          <img
-                            src="/assets/img/tv/tv-02.png"
-                            alt="ტელევიზია"
-                            loading="lazy"
-                          />
-                        </Link>
-                      </div>
-                    </div>
-                  </SplideSlide>
-                  <SplideSlide>
-                    <div className="item item--hero" id="tvcorrect">
-                      <div className="item__cover" id="tv_id">
-                        {" "}
-                        <Link href="/tv">
-                          <img
-                            src="/assets/img/tv/tv-03.png"
-                            alt="ტელევიზია"
-                            loading="lazy"
-                          />
-                        </Link>
-                      </div>
-                    </div>
-                  </SplideSlide>
-                  <SplideSlide>
-                    <div className="item item--hero" id="tvcorrect">
-                      <div className="item__cover" id="tv_id">
-                        {" "}
-                        <Link href="/tv">
-                          <img
-                            src="/assets/img/tv/tv-04.png"
-                            alt="ტელევიზია"
-                            loading="lazy"
-                          />
-                        </Link>
-                      </div>
-                    </div>
-                  </SplideSlide>
-                  <SplideSlide>
-                    <div className="item item--hero" id="tvcorrect">
-                      <div className="item__cover" id="tv_id">
-                        {" "}
-                        <Link href="/tv">
-                          <img
-                            src="/assets/img/tv/tv-05.png"
-                            alt="ტელევიზია"
-                            loading="lazy"
-                          />
-                        </Link>
-                      </div>
-                    </div>
-                  </SplideSlide>
-                  <SplideSlide>
-                    <div className="item item--hero" id="tvcorrect">
-                      <div className="item__cover" id="tv_id">
-                        {" "}
-                        <Link href="/tv">
-                          <img
-                            src="/assets/img/tv/tv-06.png"
-                            alt="ტელევიზია"
-                            loading="lazy"
-                          />
-                        </Link>
-                      </div>
-                    </div>
-                  </SplideSlide>
-                  <SplideSlide>
-                    <div className="item item--hero" id="tvcorrect">
-                      <div className="item__cover" id="tv_id">
-                        {" "}
-                        <Link href="/tv">
-                          <img
-                            src="/assets/img/tv/tv-07.png"
-                            alt="ტელევიზია"
-                            loading="lazy"
-                          />
-                        </Link>
-                      </div>
-                    </div>
-                  </SplideSlide>
-                  <SplideSlide>
-                    <div className="item item--hero" id="tvcorrect">
-                      <div className="item__cover" id="tv_id">
-                        {" "}
-                        <Link href="/tv">
-                          <img
-                            src="/assets/img/tv/tv-08.png"
-                            alt="ტელევიზია"
-                            loading="lazy"
-                          />
-                        </Link>
-                      </div>
-                    </div>
-                  </SplideSlide>
-                  <SplideSlide>
-                    <div className="item item--hero" id="tvcorrect">
-                      <div className="item__cover" id="tv_id">
-                        {" "}
-                        <Link href="/tv">
-                          <img
-                            src="/assets/img/tv/tv-09.png"
-                            alt="ტელევიზია"
-                            loading="lazy"
-                          />
-                        </Link>
-                      </div>
-                    </div>
-                  </SplideSlide>
-                </SplideTrack>
-              </Splide>
+             <TvCarousel />
             </div>
             {/*  end carousel  */}
           </div>

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Helmet } from "react-helmet";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { signOut } from "firebase/auth";
@@ -43,20 +42,6 @@ export default function Header() {
 
   return (
     <>
-      <Helmet>
-        <link rel="canonical" href={location.href} />
-        <link
-          rel="search"
-          type="application/opensearchdescription+xml"
-          title="filmebi.in | ფილმები ქართულად | Filmebi Qartulad | სერიალები ქართულად | Serialebi Qartulad"
-          href="https://filmebi.in/opensearch.xml"
-        />
-        <link
-          rel="preconnect"
-          href="https://filmebi.in/"
-          fetchpriority="high"
-        />
-      </Helmet>
       <header className="header">
         <div className="container">
           <div className="row">
