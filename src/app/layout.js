@@ -3,8 +3,8 @@ import "../assets/css/main.css";
 import { AuthProvider } from "../componenets/login/authcontext";
 import Header from "../componenets/Header";
 import Footer from "../componenets/Footer";
-import { MovieProvider } from "../componenets/MoviesContext";
 import { fetchMoviesData } from "../componenets/fetchMoviesData";
+import { MovieProvider } from "../componenets/MoviesContext";
 
 export const metadata = {
   title:
