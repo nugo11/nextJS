@@ -14,7 +14,7 @@ function getRatingclassName(rating) {
 
 export default function Slider({ title, per, rendered, boo }) {
   const { ser, animation, movSlider } = useMovieData();
-
+  
   if (rendered === "movSlider") {
     rendered = movSlider;
   } else if (rendered === "ser") {

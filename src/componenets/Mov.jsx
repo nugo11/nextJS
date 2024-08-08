@@ -1,8 +1,10 @@
+"use client";
+
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useRouter, usePathname } from "next/navigation";
+import Link from "next/link";
 import img404 from "../assets/img/404 - mov.webp";
-import { useMovies } from "./MoviesContext";
-import { Helmet } from "react-helmet";
+import { useMovieData } from "../componenets/MoviesContext";
 import { ArrowL, PlayIcon } from "./icons/icons";
 
 const options = [
@@ -45,14 +47,14 @@ function getRatingClassName(rating) {
 }
 
 function useQuery() {
-  return new URLSearchParams(useLocation().search);
+  return new URLSearchParams(usePathname());
 }
 
 export default function Mov() {
-  const { movies, totalPages } = useMovies();
-  
+  const { movies, totalPages } = useMovieData();
+
   const query = useQuery();
-  const navigate = useNavigate();
+  const route = useRouter();
   const currentPage = Number(query.get("page")) || 1;
   const [filterValues, setFilterValues] = useState({
     country: "",
@@ -63,18 +65,17 @@ export default function Mov() {
     genre: [],
   });
 
-
   const [show404, setShow404] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   useEffect(() => {
     if (movies.length === 0) {
-        setShow404(true);
+      setShow404(true);
     } else {
       setShow404(false);
     }
   }, [movies]);
-  
+
   const [year_from_state, setYearState] = useState(null);
   const [year_to_state, setYearToState] = useState(null);
 
@@ -169,7 +170,7 @@ export default function Mov() {
     });
     params.delete("page");
 
-    navigate(`?${params.toString()}`);
+    route.push(`?${params.toString()}`);
   };
 
   const scrollRef = useRef(null);
@@ -198,7 +199,7 @@ export default function Mov() {
   const paginate = (pageNumber) => {
     const params = new URLSearchParams(query);
     params.set("page", pageNumber);
-    navigate(`?${params.toString()}`);
+    route.push(`?${params.toString()}`);
     window.scrollTo({ top: 0 });
   };
 
@@ -211,12 +212,12 @@ export default function Mov() {
       pageNumbers.push(i);
     }
 
-    return (     
+    return (
       <ul className="paginator">
         {currentPage > 1 && (
           <li className="paginator__item paginator__item--prev">
             <a onClick={() => paginate(currentPage - 1)}>
-              <ArrowL width={20} height={20} color='#fff' boo={false} />
+              <ArrowL width={20} height={20} color="#fff" boo={false} />
             </a>
           </li>
         )}
@@ -250,7 +251,7 @@ export default function Mov() {
         {currentPage < totalPage && (
           <li className="paginator__item paginator__item--next">
             <a onClick={() => paginate(currentPage + 1)}>
-            <ArrowL width={20} height={20} color='#fff' boo={true} />
+              <ArrowL width={20} height={20} color="#fff" boo={true} />
             </a>
           </li>
         )}
@@ -260,33 +261,6 @@ export default function Mov() {
 
   return (
     <>
-     <Helmet>
-        <meta name="robots" content="index,follow,all" />
-        <base href={window.location.href} />
-        <meta name="application-name" content="FILMEBI.IN" />
-        <meta
-          name="title"
-          content="Filmebi.in - ფილმები ქართულად | Filmebi Qartulad | სერიალები ქართულად | Serialebi Qartulad"
-        />
-        <meta
-          name="description"
-          content="filmebi.in - ახალი ფილმები და სერიალები ქართულად უფასოდ, უახლესი თურქული სერიალები ქართულად, axali filmebi da serialebi qartulad ufasod, pilmebi qartulad online, uaxlesi turquli serialebi qartulad"
-        />
-        <meta
-          name="keywords"
-          content="ფილმები, სერიალები, ქართულად, თრეილერები, მსახიობები, ონლაინ, ყურება, უფასოდ, თურქული, უახლესი, Filmebi.in, მუვიჯი, filmebi, pilmebi, serialebi, qartulad, kartulad, online, treilerebi, msaxiobebi, yureba, ufasod, turquli, uaxlesi, Filmebi.in, gemovie, jimuvi, movie.ge, moviege, muviji, gemovies, imovie.ge"
-        />
-        <meta
-          property="og:title"
-          content="ფილმები ქართულად | Filmebi Qartulad | სერიალები ქართულად | Serialebi Qartulad - Filmebi.in"
-        />
-        <meta
-          property="og:description"
-          content="Filmebi.in - ახალი ფილმები და სერიალები ქართულად უფასოდ, უახლესი თურქული სერიალები ქართულად, axali filmebi da serialebi qartulad ufasod, pilmebi qartulad online, uaxlesi turquli serialebi qartulad"
-        />
-        <meta property="og:image" content="/assets/img/cover.webp" />
-        <meta property="og:url" content="https://Filmebi.in/" />
-      </Helmet>
       {/* filter */}
       <div className="filter" style={{ marginTop: 100 }}>
         <div className="container">
@@ -294,8 +268,12 @@ export default function Mov() {
             <div className="col-12">
               <div className="filter__content">
                 <div className="horizontal-select">
-                  <button title="arrow" className="arrow left-arrow" onClick={scrollLeft}>
-                    <ArrowL color='#fff' height={20} width={20} boo={false} />
+                  <button
+                    title="arrow"
+                    className="arrow left-arrow"
+                    onClick={scrollLeft}
+                  >
+                    <ArrowL color="#fff" height={20} width={20} boo={false} />
                   </button>
                   <div className="options" ref={scrollRef}>
                     {options.map((option) => (
@@ -310,8 +288,12 @@ export default function Mov() {
                       </div>
                     ))}
                   </div>
-                  <button title="arrow" className="arrow right-arrow" onClick={scrollRight}>
-                  <ArrowL color='#fff' height={20} width={20} boo={true} />
+                  <button
+                    title="arrow"
+                    className="arrow right-arrow"
+                    onClick={scrollRight}
+                  >
+                    <ArrowL color="#fff" height={20} width={20} boo={true} />
                   </button>
                 </div>
 
@@ -406,21 +388,21 @@ export default function Mov() {
                     key={item.detailLink}
                     className="col-6 col-sm-4 col-lg-3 col-xl-2"
                   >
-                    <div className="item">  
+                    <div className="item">
                       <div className="item__cover">
                         <img
-                          src={`/mov/${item.poster}`}
+                          src={`https://filmebi.in/mov/${item.poster}`}
                           alt={`${item.title_geo} / ${item.title_en} ქართულად`}
                           loading="lazy"
                         />
 
                         <Link
                           key={item.detailLink}
-                          to={`/detail/${item.detailLink}`}
+                          href={`/detail/${item.detailLink}`}
                           state={{ movies }}
                           className="item__play"
                         >
-                         <PlayIcon />
+                          <PlayIcon />
                         </Link>
                         <span
                           className={`item__rate item__rate--${getRatingClassName(
@@ -468,7 +450,7 @@ export default function Mov() {
                         <h3 className="item__title">
                           <Link
                             key={item.detailLink}
-                            to={`/detail/${item.detailLink}`}
+                            href={`/detail/${item.detailLink}`}
                             state={{ movies }}
                           >
                             {item.title_geo}
@@ -477,7 +459,7 @@ export default function Mov() {
                         <span className="item__category">
                           <Link
                             key={item.detailLink}
-                            to={`/detail/${item.detailLink}`}
+                            href={`/detail/${item.detailLink}`}
                             state={{ movies }}
                           >
                             {item.title_en}
