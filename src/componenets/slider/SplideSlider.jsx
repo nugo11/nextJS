@@ -3,7 +3,7 @@ import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import Link from "next/link";
 import { ArrowL, PlayIcon } from "../icons/icons";
-import { useMovieData } from "../MoviesContext";
+// import { useMovieData } from "../MoviesContext";
 
 function getRatingclassName(rating) {
   if (Number(rating) < 6) return "red";
@@ -13,16 +13,6 @@ function getRatingclassName(rating) {
 }
 
 export default function Slider({ title, per, rendered, boo }) {
-  const { ser, animation, movSlider } = useMovieData();
-  
-  if (rendered === "movSlider") {
-    rendered = movSlider;
-  } else if (rendered === "ser") {
-    rendered = ser;
-  } else if (rendered === "animation") {
-    rendered = animation;
-  }
-
   return (
     <Splide
       hasTrack={false}
@@ -156,13 +146,7 @@ export default function Slider({ title, per, rendered, boo }) {
 }
 
 export function GridMov({ rendered }) {
-  const { turk, anime } = useMovieData();
-
-  if (rendered === "turk") {
-    rendered = turk;
-  } else if (rendered === "anime") {
-    rendered = anime;
-  }
+  
 
   return (
     <>

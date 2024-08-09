@@ -65,7 +65,7 @@ export default function Header() {
                   </li>
 
                   <li className="header__nav-item">
-                    <Link href="/serial?ser" className="header__nav-link">
+                    <Link href="/movies?ser" className="header__nav-link">
                       სერიალები
                     </Link>
                   </li>

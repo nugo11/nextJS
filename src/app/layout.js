@@ -2,9 +2,8 @@ import "../assets/css/main.css";
 import { AuthProvider } from "../componenets/login/authcontext";
 import Header from "../componenets/Header";
 import Footer from "../componenets/Footer";
-import { fetchMoviesData } from "../componenets/fetchMoviesData";
-import { MovieProvider } from "../componenets/MoviesContext";
-import QueryParamsComponent from "../componenets/getQyery";
+// import { fetchMoviesData } from "../componenets/fetchMoviesData";
+// import { MovieProvider } from "../componenets/MoviesContext";
 
 export const metadata = {
   title:
@@ -34,19 +33,15 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const movieData = await fetchMoviesData();
+  // const movieData = await fetchMoviesData();
 
   return (
     <html lang="ka">
       <body>
         <AuthProvider>
-          <QueryParamsComponent>
-            <MovieProvider initialData={movieData}>
               <Header />
               {children}
               <Footer />
-            </MovieProvider>
-          </QueryParamsComponent>
         </AuthProvider>
       </body>
     </html>

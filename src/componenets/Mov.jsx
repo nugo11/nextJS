@@ -4,8 +4,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import img404 from "../assets/img/404 - mov.webp";
-import { useMovieData } from "../componenets/MoviesContext";
 import { ArrowL, PlayIcon } from "./icons/icons";
+import { useSearchParams } from "next/navigation";
 
 const options = [
   "კომედია",
@@ -47,15 +47,17 @@ function getRatingClassName(rating) {
 }
 
 function useQuery() {
-  return new URLSearchParams(usePathname());
+  return new URLSearchParams(usePathname().search);
 }
 
-export default function Mov() {
-  const { movies, totalPages } = useMovieData();
+export default function Mov({ mov }) {
+  const searchParams = useSearchParams();
 
+  const movies = mov.movies;
+  const totalPages = mov.totalPages;
   const query = useQuery();
   const route = useRouter();
-  const currentPage = Number(query.get("page")) || 1;
+
   const [filterValues, setFilterValues] = useState({
     country: "",
     year_from: 1921,
@@ -154,8 +156,7 @@ export default function Mov() {
   };
 
   const applyFilters = () => {
-    const params = new URLSearchParams(query);
-
+    const params = new URLSearchParams(searchParams);
     Object.keys(filterValues).forEach((key) => {
       if (key === "genre") {
         params.delete("genre");
@@ -196,11 +197,12 @@ export default function Mov() {
     scrollRef.current.scrollBy({ left: 200, behavior: "smooth" });
   };
 
+  const currentPage = Number(searchParams.get("page")) || 1;
+
   const paginate = (pageNumber) => {
-    const params = new URLSearchParams(query);
+    const params = new URLSearchParams(searchParams);
     params.set("page", pageNumber);
     route.push(`?${params.toString()}`);
-    window.scrollTo({ top: 0 });
   };
 
   const renderPagination = () => {
@@ -497,4 +499,15 @@ export default function Mov() {
       {/* end catalog */}
     </>
   );
+}
+
+export async function getStaticProps() {
+  const response = await fetchMoviesData();
+  const data = await response.json();
+
+  return {
+    props: {
+      posts: data,
+    },
+  };
 }

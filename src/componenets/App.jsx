@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import SplideSlider, { GridMov, TvCarousel } from "./slider/SplideSlider";
 
-function App() {
+function App({mov}) {
   const [tab, setTab] = useState("tab-1");
 
   const handleTabClick = (tabId) => {
@@ -28,7 +28,7 @@ function App() {
             </div>
 
             <div className="col-12">
-              <SplideSlider title="ფილმები ქართულად" per={6}  rendered={'movSlider'} boo={true}/>
+              <SplideSlider title="ფილმები ქართულად" per={6}  rendered={mov.movSlider} boo={true}/>
             </div>
           </div>
         </div>
@@ -60,7 +60,7 @@ function App() {
 
             {/*  carousel  */}
             <div className="col-12">
-            <SplideSlider title="სერიალები ქართულად" per={6}  rendered='ser' boo={false}/>
+            <SplideSlider title="სერიალები ქართულად" per={6}  rendered={mov.ser} boo={false}/>
             </div>
             {/*  end carousel  */}
           </div>
@@ -133,7 +133,7 @@ function App() {
               tabIndex="0"
             >
               <div className="row">
-                <GridMov rendered={'turk'} />
+                <GridMov rendered={mov.turk} />
               </div>
             </div>
             <div
@@ -146,7 +146,7 @@ function App() {
               tabIndex="0"
             >
               <div className="row">
-              <GridMov rendered={'anime'} />
+              <GridMov rendered={mov.anime} />
               </div>
             </div>
           </div>
@@ -179,7 +179,7 @@ function App() {
 
             {/*  carousel  */}
             <div className="col-12">
-            <SplideSlider title="ანიმაციური ქართულად" per={6}  rendered='animation' boo={true}/>
+            <SplideSlider title="ანიმაციური ქართულად" per={6}  rendered={mov.animation} boo={true}/>
 
             </div>
             {/*  end carousel  */}
