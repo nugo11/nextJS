@@ -1,11 +1,12 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import img404 from "../assets/img/404 - mov.webp";
 import { ArrowL, PlayIcon } from "./icons/icons";
 import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 const options = [
   "კომედია",
@@ -46,16 +47,12 @@ function getRatingClassName(rating) {
   return "";
 }
 
-function useQuery() {
-  return new URLSearchParams(usePathname().search);
-}
 
 export default function Mov({ mov }) {
   const searchParams = useSearchParams();
 
   const movies = mov.movies;
   const totalPages = mov.totalPages;
-  const query = useQuery();
   const route = useRouter();
 
   const [filterValues, setFilterValues] = useState({
@@ -392,10 +389,11 @@ export default function Mov({ mov }) {
                   >
                     <div className="item">
                       <div className="item__cover">
-                        <img
+                        <Image
                           src={`https://filmebi.in/mov/${item.poster}`}
                           alt={`${item.title_geo} / ${item.title_en} ქართულად`}
-                          loading="lazy"
+                          width={180}
+                          height={290}
                         />
 
                         <Link
@@ -478,7 +476,7 @@ export default function Mov({ mov }) {
                 style={{ display: show404 === true && "flex" }}
               >
                 <div className="imgbg404">
-                  <img src={img404} alt="404 error movie" />
+                  <Image src={img404} width={180} height={180} alt="404 error movie" />
                 </div>
                 <b style={{ fontSize: 40, color: "#f9ab00" }}>
                   ფილმი ვერ მოიძებნა

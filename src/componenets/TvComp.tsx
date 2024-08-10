@@ -1,10 +1,5 @@
-import React, { useEffect } from "react";
 
 export default function TvComp() {
-
-  useEffect(() => {
-    window.scrollTo({ top: 0 });
-  }, []);
   
   return (
     <>

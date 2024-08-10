@@ -71,7 +71,7 @@
 
 @media (min-width: 576px) {
     .container,.container-sm {
-        max-width:540px
+        max-width:570px
     }
 }
 
@@ -89,7 +89,7 @@
 
 @media (min-width: 1200px) {
     .container,.container-lg,.container-md,.container-sm,.container-xl {
-        max-width:1140px
+        max-width:1190px
     }
 }
 
@@ -1937,7 +1937,7 @@
 
 @media (min-width: 1200px) {
     .modal-xl {
-        --bs-modal-width: 1140px
+        --bs-modal-width: 1190px
     }
 }
 
@@ -7025,7 +7025,7 @@ progress {
 
 @media (min-width: 576px) {
     .container,.container-sm {
-        max-width:540px
+        max-width:570px
     }
 }
 
@@ -7043,7 +7043,7 @@ progress {
 
 @media (min-width: 1200px) {
     .container,.container-lg,.container-md,.container-sm,.container-xl {
-        max-width:1140px
+        max-width:1190px
     }
 }
 

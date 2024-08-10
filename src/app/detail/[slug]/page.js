@@ -1,4 +1,4 @@
-import Mov from "../../componenets/Mov";
+import Detail from "../../../componenets/Detail";
 import axios from "axios";
 
 export async function fetchAndDecode(url) {
@@ -23,21 +23,17 @@ export async function fetchAndDecode(url) {
 }
 
 export async function fetchMoviesData(param) {
-  const queryString = new URLSearchParams(param).toString();
   const baseUrl =
     "https://filmebi.in/CePaSYceBolveNtlegUremPlOULEAu/emEnsItaNyCEnTARGuANacYaNQuEsTrizarYpsYmAtERBILiGh";
-  const movies = await fetchAndDecode(
-    `${baseUrl}?limit=42&fields=title_geo,title_en,detailLink,year,imdb,detailLink,country,genre,poster&${queryString}`
-  );
+  const movies = await fetchAndDecode(`${baseUrl}?detailLink=${param}`);
 
   return {
     movies: movies.articles,
-    totalPages: movies.totalPages,
   };
 }
 
-export default async function HomePage({ searchParams }) {
-  const data = await fetchMoviesData(searchParams);
+export default async function detailPage({ params }) {
+  const data = await fetchMoviesData(params.slug);
 
-  return <Mov mov={data} />;
+  return <Detail mov={data} getParam={params.slug} />;
 }

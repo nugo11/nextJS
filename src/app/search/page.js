@@ -1,4 +1,4 @@
-import Mov from "../../componenets/Mov";
+import Search from '../../componenets/search'
 import axios from "axios";
 
 export async function fetchAndDecode(url) {
@@ -32,12 +32,10 @@ export async function fetchMoviesData(param) {
 
   return {
     movies: movies.articles,
-    totalPages: movies.totalPages,
   };
 }
 
-export default async function HomePage({ searchParams }) {
-  const data = await fetchMoviesData(searchParams);
-
-  return <Mov mov={data} />;
+export default async function SearchPage({ searchParams }) {
+    const data = await fetchMoviesData(searchParams);
+    return <Search mov={data} />
 }

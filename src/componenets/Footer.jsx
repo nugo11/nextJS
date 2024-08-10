@@ -25,7 +25,7 @@ export default function Footer() {
               </span>
 
               <nav className="footer__nav">
-                <Link href="https://www.facebook.com/profile.php?id=61563455130156">
+                <Link target='_blank' href="https://www.facebook.com/profile.php?id=61563455130156">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="icon icon-tabler icon-tabler-brand-facebook-filled"
@@ -46,7 +46,7 @@ export default function Footer() {
                     />
                   </svg>
                 </Link>
-                <Link href="https://www.tiktok.com/@filmebi.in">
+                <Link target='_blank' href="https://www.tiktok.com/@filmebi.in">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="icon icon-tabler icon-tabler-brand-tiktok-filled"
@@ -67,7 +67,7 @@ export default function Footer() {
                     />
                   </svg>
                 </Link>
-                <Link href="https://www.instagram.com/filmebi.in/">
+                <Link target='_blank' href="https://www.instagram.com/filmebi.in/">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="icon icon-tabler icon-tabler-brand-instagram"

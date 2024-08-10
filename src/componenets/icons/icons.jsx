@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function SearchIcon({ color, width, height }) {
   return (
     <svg

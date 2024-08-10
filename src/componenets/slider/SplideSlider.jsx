@@ -3,7 +3,7 @@ import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import Link from "next/link";
 import { ArrowL, PlayIcon } from "../icons/icons";
-// import { useMovieData } from "../MoviesContext";
+import Image from "next/image";
 
 function getRatingclassName(rating) {
   if (Number(rating) < 6) return "red";
@@ -62,10 +62,11 @@ export default function Slider({ title, per, rendered, boo }) {
                   <SplideSlide>
                     <div className="item item--hero">
                       <div className="item__cover">
-                        <img
+                        <Image
+                          width={180}
+                          height={290}
                           src={`https://filmebi.in/mov/${item.poster}`}
                           alt={`${item.title_geo} / ${item.title_en} ქართულად`}
-                          loading="lazy"
                         />
 
                         <Link
@@ -146,8 +147,6 @@ export default function Slider({ title, per, rendered, boo }) {
 }
 
 export function GridMov({ rendered }) {
-  
-
   return (
     <>
       {rendered &&
@@ -158,10 +157,11 @@ export function GridMov({ rendered }) {
           >
             <div className="item">
               <div className="item__cover">
-                <img
+                <Image
+                  width={180}
+                  height={290}
                   src={`https://filmebi.in/mov/${item.poster}`}
                   alt={`${item.title_geo} / ${item.title_en} ქართულად`}
-                  loading="lazy"
                 />
                 <Link
                   key={item.detailLink}
@@ -285,10 +285,11 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <img
+                  <Image
+                    width={40}
+                    height={40}
                     src="https://filmebi.in/assets/img/tv/tv-01.png"
                     alt="ტელევიზია"
-                    loading="lazy"
                   />
                 </Link>
               </div>
@@ -299,10 +300,11 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <img
+                  <Image
+                    width={40}
+                    height={40}
                     src="https://filmebi.in/assets/img/tv/tv-02.png"
                     alt="ტელევიზია"
-                    loading="lazy"
                   />
                 </Link>
               </div>
@@ -313,10 +315,11 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <img
+                  <Image
+                    width={40}
+                    height={40}
                     src="https://filmebi.in/assets/img/tv/tv-03.png"
                     alt="ტელევიზია"
-                    loading="lazy"
                   />
                 </Link>
               </div>
@@ -327,10 +330,11 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <img
+                  <Image
+                    width={40}
+                    height={40}
                     src="https://filmebi.in/assets/img/tv/tv-04.png"
                     alt="ტელევიზია"
-                    loading="lazy"
                   />
                 </Link>
               </div>
@@ -341,10 +345,11 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <img
+                  <Image
+                    width={40}
+                    height={40}
                     src="https://filmebi.in/assets/img/tv/tv-05.png"
                     alt="ტელევიზია"
-                    loading="lazy"
                   />
                 </Link>
               </div>
@@ -355,10 +360,11 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <img
+                  <Image
+                    width={40}
+                    height={40}
                     src="https://filmebi.in/assets/img/tv/tv-06.png"
                     alt="ტელევიზია"
-                    loading="lazy"
                   />
                 </Link>
               </div>
@@ -369,10 +375,11 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <img
+                  <Image
+                    width={40}
+                    height={40}
                     src="https://filmebi.in/assets/img/tv/tv-07.png"
                     alt="ტელევიზია"
-                    loading="lazy"
                   />
                 </Link>
               </div>
@@ -383,10 +390,11 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <img
+                  <Image
+                    width={40}
+                    height={40}
                     src="https://filmebi.in/assets/img/tv/tv-08.png"
                     alt="ტელევიზია"
-                    loading="lazy"
                   />
                 </Link>
               </div>
@@ -397,10 +405,11 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <img
+                  <Image
+                    width={40}
+                    height={40}
                     src="https://filmebi.in/assets/img/tv/tv-09.png"
                     alt="ტელევიზია"
-                    loading="lazy"
                   />
                 </Link>
               </div>

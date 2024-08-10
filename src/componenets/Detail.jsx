@@ -1,57 +1,45 @@
+"use client";
 import React, { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
-import { useParams, Link, useLocation } from "react-router-dom";
-import { useMovies } from "./MoviesContext";
+import Link from "next/link";
 import { useAuth } from "./login/authcontext";
+import Image from "next/image";
 
-export default function Detail() {
-  const { detailLink } = useParams();
-  const { detailResults } = useMovies();
+export default function Detail({ mov, getParam }) {
+  const params = getParam;
+  const detailResults = mov.movies["0"];
   const { user } = useAuth();
-  const location = useLocation();
-
-  const movies =
-    location.state?.movies ||
-    location.state?.ser ||
-    location.state?.turk ||
-    location.state?.anime ||
-    location.state?.animation ||
-    location.state?.detailResults;
-
-  const selectedItem = movies
-    ? movies.find((movie) => movie.detailLink === detailLink)
-    : detailResults;
+console.log(getParam)
+  const selectedItem = detailResults;
 
   if (!selectedItem) {
     return <div>Item not found</div>;
   }
 
-  useEffect(() => {
-    if (selectedItem) {
-      // Update the view count
-      fetch(
-        "https://filmebi.in/CePaSYceBolveNtlegUremPlOULEAu/update_view_count.php",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: new URLSearchParams({
-            id: selectedItem.id,
-          }),
-        }
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          if (!data.success) {
-            console.error("Error updating view count:", data.error);
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    }
-  }, [selectedItem]);
+  // useEffect(() => {
+  //   if (selectedItem) {
+  //     fetch(
+  //       "https://filmebi.in/CePaSYceBolveNtlegUremPlOULEAu/update_view_count.php",
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/x-www-form-urlencoded",
+  //         },
+  //         body: new URLSearchParams({
+  //           id: selectedItem.id,
+  //         }),
+  //       }
+  //     )
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         if (!data.success) {
+  //           console.error("Error updating view count:", data.error);
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error:", error);
+  //       });
+  //   }
+  // }, [selectedItem]);
 
   const [isEditing, setIsEditing] = useState(false);
   const [editedMovie, setEditedMovie] = useState(selectedItem);
@@ -166,44 +154,6 @@ export default function Detail() {
 
   return (
     <>
-      <Helmet>
-        <meta name="description" content={selectedItem.story} />
-        <meta
-          name="keywords"
-          content={`${selectedItem.title_geo}, ${selectedItem.title_en}<`}
-        />
-
-        <meta property="twitter:card" content="summary" />
-        <meta
-          property="twitter:title"
-          content={`${selectedItem.title_geo} | ${selectedItem.title_en} | ${selectedItem.country}`}
-        />
-        <meta property="twitter:url" content={window.location.href} />
-        <meta property="twitter:description" content={selectedItem.story} />
-        <meta property="og:type" content="article" />
-        <meta
-          property="og:site_name"
-          content="Filmebi.in | filmebi qartulad | serialebi qartulad"
-        />
-        <meta
-          property="og:title"
-          content={`${selectedItem.title_geo} | ${selectedItem.title_en} | ${selectedItem.country}`}
-        />
-        <meta property="og:url" content={window.location.href} />
-        <meta property="og:description" content={selectedItem.story} />
-        <meta property="og:image" content={selectedItem.poster} />
-        <meta property="fb:app_id" content="5369417443166292" />
-
-        <div id="fb-root"></div>
-        <script
-          async
-          defer
-          crossorigin="anonymous"
-          src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0&appId=419473549161355"
-          nonce="H1hc4ujB"
-        ></script>
-      </Helmet>
-
       <div
         className="fullbg"
         style={{ backgroundImage: `url(/mov/${selectedItem.poster})` }}
@@ -711,11 +661,13 @@ export default function Detail() {
               <div className="col-12">
                 <div className="item item--details">
                   <div className="row">
-                    <div className="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-3">
+                    <div className="col-7 col-sm-5 col-md-4 col-lg-3 col-xl-2 col-xxl-2">
                       <div className="item__cover">
-                        <img
-                          src={`/mov/${selectedItem.poster}`}
+                        <Image
+                          src={`https://filmebi.in/mov/${selectedItem.poster}`}
                           alt={`${selectedItem.title_geo} / ${selectedItem.title_en} ქართულად`}
+                          width={180}
+                          height={300}
                         />
                         <span
                           className={`item__rate item__rate--${getRatingClassName(
@@ -732,7 +684,7 @@ export default function Detail() {
                           <li>
                             <span>წელი:</span>{" "}
                             <Link
-                              to={`/movies?year_from=${selectedItem.year}&year_to=${selectedItem.year}`}
+                              href={`/movies?year_from=${selectedItem.year}&year_href=${selectedItem.year}`}
                             >
                               {selectedItem.year}
                             </Link>
@@ -742,7 +694,10 @@ export default function Detail() {
                             {selectedItem.genre
                               .split(", ")
                               .map((item, index) => (
-                                <Link key={index} to={`/movies?genre=${item}`}>
+                                <Link
+                                  key={index}
+                                  href={`/movies?genre=${item}`}
+                                >
                                   {item}
                                 </Link>
                               ))}
@@ -754,7 +709,7 @@ export default function Detail() {
                               .map((item, index) => (
                                 <Link
                                   key={index}
-                                  to={`/movies?country=${item}`}
+                                  href={`/movies?country=${item}`}
                                 >
                                   {item}
                                 </Link>
@@ -767,7 +722,7 @@ export default function Detail() {
                               .map((item, index) => (
                                 <Link
                                   key={index}
-                                  to={`/movies?director=${item}`}
+                                  href={`/movies?director=${item}`}
                                 >
                                   {item}
                                 </Link>
@@ -778,7 +733,10 @@ export default function Detail() {
                             {selectedItem.actors
                               .split(", ")
                               .map((item, index) => (
-                                <Link key={index} to={`/movies?actors=${item}`}>
+                                <Link
+                                  key={index}
+                                  href={`/movies?actors=${item}`}
+                                >
                                   {item}
                                 </Link>
                               ))}
@@ -825,7 +783,7 @@ export default function Detail() {
                         <div className="comments">
                           <div
                             className="fb-comments"
-                            data-href={window.location.href}
+                            data-href={`/detail/${params}`}
                             data-width="100%"
                             data-numposts="5"
                           ></div>
