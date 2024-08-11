@@ -7,11 +7,10 @@ import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { useAuth } from "../componenets/login/authcontext";
 import SearchIcon from "./icons/icons";
+import Image from 'next/image'
 import logo from "../assets/img/logo.webp";
-import { usePathname } from 'next/navigation';
 
 export default function Header() {
-  const location = usePathname();
 
   const [change, setChange] = useState("");
   const router = useRouter();
@@ -48,7 +47,7 @@ export default function Header() {
             <div className="col-12">
               <div className="header__content">
                 <Link href="/" className="header__logo">
-                  <img src={logo} alt="logo" width={131} height={24} />
+                  <Image src={logo.src} alt="logo" width={131} height={24} />
                 </Link>
 
                 <ul className="header__nav">

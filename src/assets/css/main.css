@@ -26719,7 +26719,6 @@ body::-webkit-scrollbar-thumb {
     content: "";
     width: 100%;
     height: 550px;
-    background: url(/assets/img/bg_pattern.png) #1f21284f;
     z-index: 2;
     box-shadow: inset 0 -200px 200px #1a191f
 }
@@ -26731,7 +26730,6 @@ body::-webkit-scrollbar-thumb {
 }
 #mineslider {
     width: 100%;
-    background-image: url(/assets/home-bg-CC2hfMJ6.webp);
     box-shadow: inset 0 -200px 200px #1a191f;
     background-size: cover;
 }
@@ -26767,20 +26765,13 @@ body::-webkit-scrollbar-thumb {
 }
 
 #sabavshvobg {
-    background-image: url(/assets/animation-bg-CESyQ52G.webp);
     width: 100%;
     height: 50%;
     z-index: 1;
     box-shadow: inset 0 -200px 200px #1a191f
 }
 
-#serilisbg {
-    background-image: url(/assets/animation-bg-CESyQ52G.webp);
-    width: 100%;
-    height: 50%;
-    z-index: 1;
-    box-shadow: inset 0 -200px 200px #1a191f
-}
+
 
 #tvcorrect {
     background-color: #161519ad;
@@ -27173,18 +27164,6 @@ body::-webkit-scrollbar-thumb {
     padding-top: 2px;
     white-space: nowrap;
     overflow: hidden
-}
-
-@font-face {
-    font-family: BPG Glaho WEB Caps;
-    src: url(/assets/bpg-glaho-web-caps-webfont-COq-y9Xf.eot);
-    src: url(/assets/bpg-glaho-web-caps-webfont-COq-y9Xf.eot?#iefix) format("embedded-opentype"),url(/assets/bpg-glaho-web-caps-webfont-L_slYmKQ.woff2) format("woff2"),url(/assets/bpg-glaho-web-caps-webfont-CZ2bWAMt.woff) format("woff"),url(/assets/bpg-glaho-web-caps-webfont-DGslmWZN.ttf) format("truetype"),url(/assets/bpg-glaho-web-caps-webfont-DPCLnQ7Z.svg#bpg_glaho_web_capsregular) format("svg")
-}
-
-@font-face {
-    font-family: BPG Glaho WEB Caps;
-    src: url(/assets/bpg-glaho-web-caps-webfont-COq-y9Xf.eot);
-    src: url(/assets/bpg-glaho-web-caps-webfont-COq-y9Xf.eot?#iefix) format("embedded-opentype"),url(/assets/bpg-glaho-web-caps-webfont-L_slYmKQ.woff2) format("woff2"),url(/assets/bpg-glaho-web-caps-webfont-CZ2bWAMt.woff) format("woff"),url(/assets/bpg-glaho-web-caps-webfont-DGslmWZN.ttf) format("truetype"),url(/assets/bpg-glaho-web-caps-webfont-DPCLnQ7Z.svg#bpg_glaho_web_capsregular) format("svg")
 }
 
 .splide__container {

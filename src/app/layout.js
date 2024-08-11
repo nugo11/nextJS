@@ -1,7 +1,10 @@
 import "../assets/css/main.css";
+import '../assets/css/bpg-glaho-web-caps.css'
 import { AuthProvider } from "../componenets/login/authcontext";
 import Header from "../componenets/Header";
 import Footer from "../componenets/Footer";
+import Head from "next/head";
+
 
 export const metadata = {
   title:
@@ -31,10 +34,12 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  // const movieData = await fetchMoviesData();
 
   return (
-    <html lang="ka">
+    <html lang="ka" suppressHydrationWarning={true}>
+       <Head>
+        <link rel="stylesheet" href="" />
+      </Head>
       <body>
         <AuthProvider>
               <Header />

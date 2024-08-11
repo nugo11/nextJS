@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useEffect } from 'react';
-import Link from 'next/link'; 
-import { ArrowUp } from './icons/icons';
-import logo from '../assets/img/logo.webp'
-import mineJS from '../assets/js/main.js'
+import React, { useEffect } from "react";
+import Link from "next/link";
+import { ArrowUp } from "./icons/icons";
+import mineJS from "../assets/js/main.js";
+import Image from "next/image";
+import logo from "../assets/img/logo.webp";
 
 export default function Footer() {
   useEffect(() => {
@@ -17,7 +18,7 @@ export default function Footer() {
           <div className="col-12">
             <div className="footer__content">
               <Link href="/" className="footer__logo">
-              <img src={logo} alt="logo" width={131} height={24} />
+                <Image src={logo.src} alt="logo" width={131} height={24} />
               </Link>
 
               <span className="footer__copyright">
@@ -25,7 +26,10 @@ export default function Footer() {
               </span>
 
               <nav className="footer__nav">
-                <Link target='_blank' href="https://www.facebook.com/profile.php?id=61563455130156">
+                <Link
+                  target="_blank"
+                  href="https://www.facebook.com/profile.php?id=61563455130156"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="icon icon-tabler icon-tabler-brand-facebook-filled"
@@ -46,7 +50,7 @@ export default function Footer() {
                     />
                   </svg>
                 </Link>
-                <Link target='_blank' href="https://www.tiktok.com/@filmebi.in">
+                <Link target="_blank" href="https://www.tiktok.com/@filmebi.in">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="icon icon-tabler icon-tabler-brand-tiktok-filled"
@@ -67,7 +71,10 @@ export default function Footer() {
                     />
                   </svg>
                 </Link>
-                <Link target='_blank' href="https://www.instagram.com/filmebi.in/">
+                <Link
+                  target="_blank"
+                  href="https://www.instagram.com/filmebi.in/"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="icon icon-tabler icon-tabler-brand-instagram"
@@ -86,8 +93,6 @@ export default function Footer() {
                     <path d="M16.5 7.5l0 .01" />
                   </svg>
                 </Link>
-                <div id="top-ge-counter-container" data-site-id="117514"></div>
-                <script async src="//counter.top.ge/counter.js"></script>
               </nav>
 
               <button title="go up" className="footer__back" type="button">
@@ -98,6 +103,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-    
   );
 }

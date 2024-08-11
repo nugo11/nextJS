@@ -1,32 +1,19 @@
-import Search from '../../componenets/search'
+import Search from "../../componenets/search";
 import axios from "axios";
 
-export async function fetchAndDecode(url) {
+async function fetchAndParse(url) {
   try {
-    const res = await axios.get(url, { responseType: "text" });
-    const base64Data = res.data;
-    const binaryString = atob(base64Data);
-
-    const uint8Array = new Uint8Array(binaryString.length);
-    for (let i = 0; i < binaryString.length; i++) {
-      uint8Array[i] = binaryString.charCodeAt(i);
-    }
-
-    const decoder = new TextDecoder("utf-8");
-    const utf8String = decoder.decode(uint8Array);
-
-    return JSON.parse(utf8String);
+    const res = await axios.get(url);
+    return res.data;
   } catch (error) {
-    console.error("Failed to fetch or decode data:", error);
+    console.error("Failed to fetch or parse data:", error);
     return { articles: [], totalPages: 0 };
   }
 }
-
 export async function fetchMoviesData(param) {
   const queryString = new URLSearchParams(param).toString();
-  const baseUrl =
-    "https://filmebi.in/CePaSYceBolveNtlegUremPlOULEAu/emEnsItaNyCEnTARGuANacYaNQuEsTrizarYpsYmAtERBILiGh";
-  const movies = await fetchAndDecode(
+  const baseUrl = "https://filmebi.in/api/movies.php";
+  const movies = await fetchAndParse(
     `${baseUrl}?limit=42&fields=title_geo,title_en,detailLink,year,imdb,detailLink,country,genre,poster&${queryString}`
   );
 
@@ -36,6 +23,6 @@ export async function fetchMoviesData(param) {
 }
 
 export default async function SearchPage({ searchParams }) {
-    const data = await fetchMoviesData(searchParams);
-    return <Search mov={data} />
+  const data = await fetchMoviesData(searchParams);
+  return <Search mov={data} />;
 }
