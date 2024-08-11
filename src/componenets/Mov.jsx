@@ -390,7 +390,7 @@ export default function Mov({ mov }) {
                     <div className="item">
                       <div className="item__cover">
                         <Image
-                          src={`https://filmebi.in/mov/${item.poster}`}
+                          src={`${item.poster}`}
                           alt={`${item.title_geo} / ${item.title_en} ქართულად`}
                           width={180}
                           height={290}

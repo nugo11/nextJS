@@ -65,7 +65,7 @@ export default function Slider({ title, per, rendered, boo }) {
                         <Image
                           width={180}
                           height={290}
-                          src={`https://filmebi.in/mov/${item.poster}`}
+                          src={`${item.poster}`}
                           alt={`${item.title_geo} / ${item.title_en} ქართულად`}
                         />
 
@@ -160,7 +160,7 @@ export function GridMov({ rendered }) {
                 <Image
                   width={180}
                   height={290}
-                  src={`https://filmebi.in/mov/${item.poster}`}
+                  src={`${item.poster}`}
                   alt={`${item.title_geo} / ${item.title_en} ქართულად`}
                 />
                 <Link

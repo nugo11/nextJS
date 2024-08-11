@@ -664,7 +664,7 @@ console.log(getParam)
                     <div className="col-7 col-sm-5 col-md-4 col-lg-3 col-xl-2 col-xxl-2">
                       <div className="item__cover">
                         <Image
-                          src={`https://filmebi.in/mov/${selectedItem.poster}`}
+                          src={`${selectedItem.poster}`}
                           alt={`${selectedItem.title_geo} / ${selectedItem.title_en} ქართულად`}
                           width={180}
                           height={300}
