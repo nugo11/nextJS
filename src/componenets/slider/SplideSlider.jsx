@@ -65,7 +65,7 @@ export default function Slider({ title, per, rendered, boo }) {
                         <Image
                           width={180}
                           height={290}
-                          src={`${item.poster}`}
+                          src={`/${item.poster}`}
                           alt={`${item.title_geo} / ${item.title_en} ქართულად`}
                         />
 
@@ -160,7 +160,7 @@ export function GridMov({ rendered }) {
                 <Image
                   width={180}
                   height={290}
-                  src={`${item.poster}`}
+                  src={`/${item.poster}`}
                   alt={`${item.title_geo} / ${item.title_en} ქართულად`}
                 />
                 <Link
@@ -288,7 +288,7 @@ export function TvCarousel() {
                   <Image
                     width={40}
                     height={40}
-                    src="https://filmebi.in/assets/img/tv/tv-01.png"
+                    src="/assets/img/tv/tv-01.png"
                     alt="ტელევიზია"
                   />
                 </Link>
@@ -303,7 +303,7 @@ export function TvCarousel() {
                   <Image
                     width={40}
                     height={40}
-                    src="https://filmebi.in/assets/img/tv/tv-02.png"
+                    src="/assets/img/tv/tv-02.png"
                     alt="ტელევიზია"
                   />
                 </Link>
@@ -318,7 +318,7 @@ export function TvCarousel() {
                   <Image
                     width={40}
                     height={40}
-                    src="https://filmebi.in/assets/img/tv/tv-03.png"
+                    src="/assets/img/tv/tv-03.png"
                     alt="ტელევიზია"
                   />
                 </Link>
@@ -333,7 +333,7 @@ export function TvCarousel() {
                   <Image
                     width={40}
                     height={40}
-                    src="https://filmebi.in/assets/img/tv/tv-04.png"
+                    src="/assets/img/tv/tv-04.png"
                     alt="ტელევიზია"
                   />
                 </Link>
@@ -348,7 +348,7 @@ export function TvCarousel() {
                   <Image
                     width={40}
                     height={40}
-                    src="https://filmebi.in/assets/img/tv/tv-05.png"
+                    src="/assets/img/tv/tv-05.png"
                     alt="ტელევიზია"
                   />
                 </Link>
@@ -363,7 +363,7 @@ export function TvCarousel() {
                   <Image
                     width={40}
                     height={40}
-                    src="https://filmebi.in/assets/img/tv/tv-06.png"
+                    src="/assets/img/tv/tv-06.png"
                     alt="ტელევიზია"
                   />
                 </Link>
@@ -378,7 +378,7 @@ export function TvCarousel() {
                   <Image
                     width={40}
                     height={40}
-                    src="https://filmebi.in/assets/img/tv/tv-07.png"
+                    src="/assets/img/tv/tv-07.png"
                     alt="ტელევიზია"
                   />
                 </Link>
@@ -393,7 +393,7 @@ export function TvCarousel() {
                   <Image
                     width={40}
                     height={40}
-                    src="https://filmebi.in/assets/img/tv/tv-08.png"
+                    src="/assets/img/tv/tv-08.png"
                     alt="ტელევიზია"
                   />
                 </Link>
@@ -408,7 +408,7 @@ export function TvCarousel() {
                   <Image
                     width={40}
                     height={40}
-                    src="https://filmebi.in/assets/img/tv/tv-09.png"
+                    src="/assets/img/tv/tv-09.png"
                     alt="ტელევიზია"
                   />
                 </Link>
