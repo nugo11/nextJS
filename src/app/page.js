@@ -12,7 +12,7 @@ async function fetchAndParse(url) {
 }
 
 async function fetchMoviesData() {
-  const baseUrl = "https://filmebi.in/api/movies.php";
+  const baseUrl = "https://filmebi.in/api/movies";
   const [ser, turk, anime, animation, movSlider] = await Promise.all([
     fetchAndParse(`${baseUrl}?genre=${encodeURIComponent('სერიალი')}&limit=8&fields=title_geo,title_en,detailLink,year,imdb,detailLink,country,genre,poster`),
     fetchAndParse(`${baseUrl}?genre=${encodeURIComponent('თურქული სერიალები')}&limit=12&fields=title_geo,title_en,detailLink,year,imdb,detailLink,country,genre,poster`),

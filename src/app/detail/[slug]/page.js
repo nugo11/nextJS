@@ -12,7 +12,7 @@ async function fetchAndParse(url) {
 }
 
 export async function fetchMoviesData(param) {
-  const baseUrl = "https://filmebi.in/api/movies.php";
+  const baseUrl = "https://filmebi.in/api/movies";
   const movies = await fetchAndParse(`${baseUrl}?detailLink=${param}`);
 
   return {
