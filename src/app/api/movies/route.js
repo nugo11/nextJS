@@ -43,50 +43,63 @@ export async function GET(request) {
 
     let sql = `SELECT ${selectFields} FROM movies WHERE 1=1`;
 
+    // Handle `poster` parameter
     if (poster) {
       const posterConditions = poster.split(',').map(p => `poster LIKE '%${p.trim()}%'`).join(' OR ');
       sql += ` AND (${posterConditions})`;
     }
 
+    // Handle `year_from` and `year_to` parameters
     if (year_from && year_to) {
       sql += ` AND year BETWEEN '${year_from}' AND '${year_to}'`;
     }
 
+    // Handle `imdb_from` and `imdb_to` parameters
     if (imdb_from && imdb_to) {
       sql += ` AND imdb BETWEEN '${imdb_from}' AND '${imdb_to}'`;
     }
 
+    // Handle `country` parameter
     if (country) {
       const countryConditions = country.split(',').map(c => `country LIKE '%${c.trim()}%'`).join(' OR ');
       sql += ` AND (${countryConditions})`;
     }
 
+    // Handle `director` parameter
     if (director) {
       sql += ` AND director LIKE '%${conn.escape(director)}%'`;
     }
 
+    // Handle `detailLink` parameter
     if (detailLink) {
       sql += ` AND detailLink LIKE '%${conn.escape(detailLink)}%'`;
     }
 
+    // Handle `actors` parameter
     if (actors) {
       sql += ` AND FIND_IN_SET('${conn.escape(actors)}', actors)`;
     }
 
+    // Handle `title_geo` parameter
     if (title_geo) {
       sql += ` AND title_geo LIKE '%${conn.escape(title_geo)}%'`;
     }
 
+    let titleEnConditions = '';
+    // Handle `title_en` parameter
     if (title_en) {
-      const titleEnConditions = title_en.split(',').map(t => `title_en LIKE '%${t.trim()}%'`).join(' OR ');
+        titleEnConditions = title_en.split(',').map(t => `title_en LIKE '%${t.trim()}%'`).join(' OR ');
       sql += ` AND (${titleEnConditions})`;
     }
 
+    // Handle `genre` parameter
+    let genreArr = '';
     if (genre) {
-      const genreArr = genre.split(',').map(g => `genre LIKE '%${g.trim()}%'`).join(' AND ');
+      genreArr = genre.split(',').map(g => `genre LIKE '%${g.trim()}%'`).join(' AND ');
       sql += ` AND (${genreArr})`;
     }
 
+    // Handle `mov` and `ser` parameters
     if (mov) {
       sql += ` AND genre NOT LIKE '%სერიალი%' AND genre NOT LIKE '%თურქული სერიალები%'`;
     }
