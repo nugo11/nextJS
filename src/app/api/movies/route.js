@@ -153,6 +153,6 @@ export async function GET(request) {
     await conn.end();
     return NextResponse.json(response);
   } catch (error) {
-    return NextResponse.json({ error: 'Database query failed: ' + error.message + queryParams });
+    return NextResponse.json({ error: 'Database query failed: ' + error.message });
   }
 }
