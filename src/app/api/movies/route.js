@@ -84,7 +84,9 @@ export async function GET(request) {
 
     if (genre) {
       const genreArr = genre.replace(/[\[\]']/g, '').split(',').map(g => `genre LIKE '%${g.trim()}%'`).join(' AND ');
-      sql += ` AND (${genreArr})`;
+      if (genreArr) {
+        sql += ` AND (${genreArr})`;
+      }
     }
 
     if (mov) {
@@ -99,7 +101,46 @@ export async function GET(request) {
 
     const [rows] = await conn.execute(sql);
 
-    const countSql = `SELECT COUNT(*) as total FROM movies WHERE 1=1${sql.slice(sql.indexOf('AND'))}`;
+    // Prepare the count query, mirroring the filtering conditions
+    let countSql = `SELECT COUNT(*) as total FROM movies WHERE 1=1`;
+    
+    if (poster) {
+      countSql += ` AND (${posterConditions})`;
+    }
+    if (year_from && year_to) {
+      countSql += ` AND year BETWEEN '${year_from}' AND '${year_to}'`;
+    }
+    if (imdb_from && imdb_to) {
+      countSql += ` AND imdb BETWEEN '${imdb_from}' AND '${imdb_to}'`;
+    }
+    if (country) {
+      countSql += ` AND (${countryConditions})`;
+    }
+    if (director) {
+      countSql += ` AND director LIKE '%${conn.escape(director)}%'`;
+    }
+    if (detailLink) {
+      countSql += ` AND detailLink LIKE '%${conn.escape(detailLink)}%'`;
+    }
+    if (actors) {
+      countSql += ` AND FIND_IN_SET('${conn.escape(actors)}', actors)`;
+    }
+    if (title_geo) {
+      countSql += ` AND title_geo LIKE '%${conn.escape(title_geo)}%'`;
+    }
+    if (title_en) {
+      countSql += ` AND (${titleEnConditions})`;
+    }
+    if (genre && genreArr) {
+      countSql += ` AND (${genreArr})`;
+    }
+    if (mov) {
+      countSql += ` AND genre NOT LIKE '%სერიალი%' AND genre NOT LIKE '%თურქული სერიალები%'`;
+    }
+    if (ser) {
+      countSql += ` AND genre LIKE '%სერიალი%'`;
+    }
+
     const [[{ total }]] = await conn.execute(countSql);
     const totalPages = Math.ceil(total / limit);
 
@@ -112,6 +153,6 @@ export async function GET(request) {
     await conn.end();
     return NextResponse.json(response);
   } catch (error) {
-    return NextResponse.json({ error: 'Database query failed: ' + error.message });
+    return NextResponse.json({ error: 'Database query failed: ' + error.message + queryParams });
   }
 }
