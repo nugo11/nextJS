@@ -1,169 +1,140 @@
-import mysql from 'mysql2/promise';
 import { NextResponse } from 'next/server';
+import mysql from 'mysql2/promise';
 
+// Database connection
 const dbConfig = {
-  host: 'localhost',
-  user: 'filmebi_all',
-  password: 'Leopardi.1234',
-  database: 'filmebi_all',
-  charset: 'utf8mb4',
+    host: 'localhost',
+    user: 'filmebi_all',
+    password: 'Leopardi.1234',
+    database: 'filmebi_all',
+    charset: 'utf8mb4',
 };
 
 export async function GET(request) {
-  try {
-    const conn = await mysql.createConnection(dbConfig);
-    const queryParams = new URL(request.url).searchParams;
+    const url = new URL(request.url);
+    const params = new URLSearchParams(url.search);
 
-    const fields = queryParams.get('fields') ? queryParams.get('fields').split(',') : ['*'];
-    const poster = queryParams.get('poster');
-    const year_from = queryParams.get('year_from');
-    const year_to = queryParams.get('year_to');
-    const imdb_from = queryParams.get('imdb_from');
-    const imdb_to = queryParams.get('imdb_to');
-    const country = queryParams.get('country');
-    const director = queryParams.get('director');
-    const detailLink = queryParams.get('detailLink');
-    const actors = queryParams.get('actors');
-    const title_geo = queryParams.get('title_geo');
-    const title_en = queryParams.get('title_en');
-    const genre = queryParams.get('genre');
-    const page = parseInt(queryParams.get('page')) || 1;
-    const limit = parseInt(queryParams.get('limit')) || 30;
-    const mov = queryParams.get('mov') ? true : false;
-    const ser = queryParams.get('ser') ? true : false;
+    // Query parameters
+    const fields = params.get('fields') ? params.get('fields').split(',') : ['*'];
+    const poster = params.get('poster');
+    const year_from = params.get('year_from');
+    const year_to = params.get('year_to');
+    const imdb_from = params.get('imdb_from');
+    const imdb_to = params.get('imdb_to');
+    const country = params.get('country');
+    const director = params.get('director');
+    const detailLink = params.get('detailLink');
+    const actors = params.get('actors');
+    const title_geo = params.get('title_geo');
+    const title_en = params.get('title_en');
+    const genre = params.get('genre');
+    const page = params.get('page') ? parseInt(params.get('page'), 10) : 1;
+    const limit = params.get('limit') ? parseInt(params.get('limit'), 10) : 30;
+    const mov = params.has('mov');
+    const ser = params.has('ser');
 
     const offset = (page - 1) * limit;
 
-    const allowedFields = [
-      'id', 'title_geo', 'title_en', 'year', 'imdb', 'country',
-      'director', 'detailLink', 'actors', 'genre', 'last_updated', 'poster'
-    ];
-    const selectedFields = fields.filter(field => allowedFields.includes(field));
-    const selectFields = selectedFields.length ? selectedFields.join(',') : '*';
+    const allowedFields = ['id', 'title_geo', 'title_en', 'year', 'imdb', 'country', 'director', 'detailLink', 'actors', 'genre', 'last_updated', 'poster'];
+    const selectedFields = fields.filter(field => allowedFields.includes(field)).join(',') || '*';
 
-    let sql = `SELECT ${selectFields} FROM movies WHERE 1=1`;
+    let sql = `SELECT ${selectedFields} FROM movies WHERE 1=1`;
+    const sqlParams = [];
 
-    // Handle `poster` parameter
+    // Construct the SQL query based on parameters
     if (poster) {
-      const posterConditions = poster.split(',').map(p => `poster LIKE '%${p.trim()}%'`).join(' OR ');
-      sql += ` AND (${posterConditions})`;
+        const posterValues = poster.split(',').map(p => `%${p}%`).join('%\' OR poster LIKE \'%');
+        sql += ` AND (poster LIKE ?)`;
+        sqlParams.push(posterValues);
     }
 
-    // Handle `year_from` and `year_to` parameters
     if (year_from && year_to) {
-      sql += ` AND year BETWEEN '${year_from}' AND '${year_to}'`;
+        sql += ` AND year BETWEEN ? AND ?`;
+        sqlParams.push(year_from, year_to);
     }
 
-    // Handle `imdb_from` and `imdb_to` parameters
     if (imdb_from && imdb_to) {
-      sql += ` AND imdb BETWEEN '${imdb_from}' AND '${imdb_to}'`;
+        sql += ` AND imdb BETWEEN ? AND ?`;
+        sqlParams.push(imdb_from, imdb_to);
     }
 
-    // Handle `country` parameter
     if (country) {
-      const countryConditions = country.split(',').map(c => `country LIKE '%${c.trim()}%'`).join(' OR ');
-      sql += ` AND (${countryConditions})`;
+        const countryConditions = country.split(',').map(c => `country LIKE ?`).join(' OR ');
+        sql += ` AND (${countryConditions})`;
+        sqlParams.push(...country.split(',').map(c => `%${c.trim()}%`));
     }
 
-    // Handle `director` parameter
     if (director) {
-      sql += ` AND director LIKE '%${conn.escape(director)}%'`;
+        sql += ` AND director LIKE ?`;
+        sqlParams.push(`%${director}%`);
     }
 
-    // Handle `detailLink` parameter
     if (detailLink) {
-      sql += ` AND detailLink LIKE '%${conn.escape(detailLink)}%'`;
+        sql += ` AND detailLink LIKE ?`;
+        sqlParams.push(`%${detailLink}%`);
     }
 
-    // Handle `actors` parameter
     if (actors) {
-      sql += ` AND FIND_IN_SET('${conn.escape(actors)}', actors)`;
+        sql += ` AND FIND_IN_SET(?, actors)`;
+        sqlParams.push(actors);
     }
 
-    // Handle `title_geo` parameter
     if (title_geo) {
-      sql += ` AND title_geo LIKE '%${conn.escape(title_geo)}%'`;
+        sql += ` AND title_geo LIKE ?`;
+        sqlParams.push(`%${title_geo}%`);
     }
 
-    let titleEnConditions = '';
-    // Handle `title_en` parameter
     if (title_en) {
-        titleEnConditions = title_en.split(',').map(t => `title_en LIKE '%${t.trim()}%'`).join(' OR ');
-      sql += ` AND (${titleEnConditions})`;
+        const titleEnValues = title_en.split(',').map(te => `%${te}%`).join('%\' OR title_en LIKE \'%');
+        sql += ` AND (title_en LIKE ?)`;
+        sqlParams.push(titleEnValues);
     }
 
-    // Handle `genre` parameter
-    let genreArr = '';
     if (genre) {
-      genreArr = genre.split(',').map(g => `genre LIKE '%${g.trim()}%'`).join(' AND ');
-      sql += ` AND (${genreArr})`;
+        const genreArr = genre.replace(/[\[\]']/g, '').split(',').map(g => `%${g.trim()}%`);
+        const genreConditions = genreArr.map(g => `genre LIKE ?`).join(' AND ');
+        sql += ` AND (${genreConditions})`;
+        sqlParams.push(...genreArr);
     }
 
-    // Handle `mov` and `ser` parameters
     if (mov) {
-      sql += ` AND genre NOT LIKE '%სერიალი%' AND genre NOT LIKE '%თურქული სერიალები%'`;
+        sql += ` AND genre NOT LIKE '%სერიალი%' AND genre NOT LIKE '%თურქული სერიალები%'`;
     }
 
     if (ser) {
-      sql += ` AND genre LIKE '%სერიალი%'`;
+        sql += ` AND genre LIKE '%სერიალი%'`;
     }
 
-    sql += ` ORDER BY last_updated DESC, id DESC LIMIT ${offset}, ${limit}`;
+    sql += ` ORDER BY last_updated DESC, id DESC LIMIT ?, ?`;
+    sqlParams.push(offset, limit);
 
-    const [rows] = await conn.execute(sql);
+    try {
+        // Connect to the database
+        const conn = await mysql.createConnection(dbConfig);
 
-    // Prepare the count query, mirroring the filtering conditions
-    let countSql = `SELECT COUNT(*) as total FROM movies WHERE 1=1`;
-    
-    if (poster) {
-      countSql += ` AND (${posterConditions})`;
-    }
-    if (year_from && year_to) {
-      countSql += ` AND year BETWEEN '${year_from}' AND '${year_to}'`;
-    }
-    if (imdb_from && imdb_to) {
-      countSql += ` AND imdb BETWEEN '${imdb_from}' AND '${imdb_to}'`;
-    }
-    if (country) {
-      countSql += ` AND (${countryConditions})`;
-    }
-    if (director) {
-      countSql += ` AND director LIKE '%${conn.escape(director)}%'`;
-    }
-    if (detailLink) {
-      countSql += ` AND detailLink LIKE '%${conn.escape(detailLink)}%'`;
-    }
-    if (actors) {
-      countSql += ` AND FIND_IN_SET('${conn.escape(actors)}', actors)`;
-    }
-    if (title_geo) {
-      countSql += ` AND title_geo LIKE '%${conn.escape(title_geo)}%'`;
-    }
-    if (title_en) {
-      countSql += ` AND (${titleEnConditions})`;
-    }
-    if (genre) {
-      countSql += ` AND (${genreArr})`;
-    }
-    if (mov) {
-      countSql += ` AND genre NOT LIKE '%სერიალი%' AND genre NOT LIKE '%თურქული სერიალები%'`;
-    }
-    if (ser) {
-      countSql += ` AND genre LIKE '%სერიალი%'`;
-    }
+        // Execute the query
+        const [rows] = await conn.execute(sql, sqlParams);
 
-    const [[{ total }]] = await conn.execute(countSql);
-    const totalPages = Math.ceil(total / limit);
+        // Count total results
+        let countSql = `SELECT COUNT(*) as total FROM movies WHERE 1=1 ${sql.slice(sql.indexOf('AND'), sql.indexOf('ORDER BY'))}`;
+        const [countRows] = await conn.execute(countSql, sqlParams.slice(0, -2));
+        const totalArticles = countRows[0].total;
+        const totalPages = Math.ceil(totalArticles / limit);
 
-    const response = {
-      articles: rows,
-      totalPages,
-      currentPage: page,
-    };
+        // Close the connection
+        await conn.end();
 
-    await conn.end();
-    return NextResponse.json(response);
-  } catch (error) {
-    return NextResponse.json({ error: 'Database query failed: ' + error.message });
-  }
+        // Prepare the response
+        const response = {
+            articles: rows,
+            totalPages,
+            currentPage: page,
+        };
+
+        // Return the JSON response
+        return NextResponse.json(response, { status: 200 });
+
+    } catch (error) {
+        return NextResponse.json({ error: 'Database query failed: ' + error.message }, { status: 500 });
+    }
 }
