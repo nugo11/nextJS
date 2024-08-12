@@ -83,10 +83,8 @@ export async function GET(request) {
     }
 
     if (genre) {
-      const genreArr = genre.replace(/[\[\]']/g, '').split(',').map(g => `genre LIKE '%${g.trim()}%'`).join(' AND ');
-      if (genreArr) {
-        sql += ` AND (${genreArr})`;
-      }
+      const genreArr = genre.split(',').map(g => `genre LIKE '%${g.trim()}%'`).join(' AND ');
+      sql += ` AND (${genreArr})`;
     }
 
     if (mov) {
@@ -131,7 +129,7 @@ export async function GET(request) {
     if (title_en) {
       countSql += ` AND (${titleEnConditions})`;
     }
-    if (genre && genreArr) {
+    if (genre) {
       countSql += ` AND (${genreArr})`;
     }
     if (mov) {
