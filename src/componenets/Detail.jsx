@@ -8,38 +8,11 @@ export default function Detail({ mov, getParam }) {
   const params = getParam;
   const detailResults = mov.movies["0"];
   const { user } = useAuth();
-console.log(getParam)
   const selectedItem = detailResults;
 
   if (!selectedItem) {
     return <div>Item not found</div>;
   }
-
-  // useEffect(() => {
-  //   if (selectedItem) {
-  //     fetch(
-  //       "https://filmebi.in/CePaSYceBolveNtlegUremPlOULEAu/update_view_count.php",
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/x-www-form-urlencoded",
-  //         },
-  //         body: new URLSearchParams({
-  //           id: selectedItem.id,
-  //         }),
-  //       }
-  //     )
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         if (!data.success) {
-  //           console.error("Error updating view count:", data.error);
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error:", error);
-  //       });
-  //   }
-  // }, [selectedItem]);
 
   const [isEditing, setIsEditing] = useState(false);
   const [editedMovie, setEditedMovie] = useState(selectedItem);

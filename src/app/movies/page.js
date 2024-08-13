@@ -25,6 +25,17 @@ export async function fetchMoviesData(param) {
   };
 }
 
+
+export async function generateMetadata({ searchParams }) {
+
+  const queryString = new URLSearchParams(searchParams).toString();
+
+  return {
+    title: `${queryString === "ser=" ? 'სერიალები - Filmebi.in' : 'ფილმები - Filmebi.in'}`,
+  };
+}
+
+
 export default async function HomePage({ searchParams }) {
   const data = await fetchMoviesData(searchParams);
 

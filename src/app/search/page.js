@@ -22,6 +22,14 @@ export async function fetchMoviesData(param) {
   };
 }
 
+export async function generateMetadata({ searchParams }) {
+
+  const queryString = new URLSearchParams(searchParams).toString();
+
+  return {
+    title: `ძებნა: ${decodeURIComponent(queryString.replace('title_en=', '').replace('title_geo=', ''))} - Filmebi.ge`,
+  };
+}
 export default async function SearchPage({ searchParams }) {
   const data = await fetchMoviesData(searchParams);
   return <Search mov={data} />;

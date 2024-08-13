@@ -17,7 +17,7 @@ async function fetchMoviesData() {
     fetchAndParse(`${baseUrl}?genre=${encodeURIComponent('სერიალი')}&limit=8&fields=title_geo,title_en,detailLink,year,imdb,detailLink,country,genre,poster`),
     fetchAndParse(`${baseUrl}?genre=${encodeURIComponent('თურქული სერიალები')}&limit=12&fields=title_geo,title_en,detailLink,year,imdb,detailLink,country,genre,poster`),
     fetchAndParse(`${baseUrl}?genre=${encodeURIComponent('სერიალი,ანიმაციური')}&limit=12&fields=title_geo,title_en,detailLink,year,imdb,detailLink,country,genre,poster`),
-    fetchAndParse(`${baseUrl}?genre=${encodeURIComponent('ანიმაციური')}&limit=8&fields=title_geo,title_en,detailLink,year,imdb,detailLink,country,genre,poster`),
+    fetchAndParse(`${baseUrl}?mov=&genre=${encodeURIComponent('ანიმაციური')}&limit=8&fields=title_geo,title_en,detailLink,year,imdb,detailLink,country,genre,poster`),
     fetchAndParse(`${baseUrl}?mov=&limit=8&fields=title_geo,title_en,detailLink,year,imdb,detailLink,country,genre,poster`),
   ]);
 

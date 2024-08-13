@@ -6,6 +6,7 @@ import Pattern from '../assets/img/bg_pattern.png'
 import bg from '../assets/img/home-bg.webp'
 import animationBg from '../assets/img/animation-bg.webp'
 
+
 function App({mov}) {
   const [tab, setTab] = useState("tab-1");
 
@@ -15,7 +16,6 @@ function App({mov}) {
 
   return (
     <>
-    {console.log(mov)}
       <div className="fullbg-pattern" style={{backgroundImage: `url(${Pattern.src})`}}></div>
       <section className="home" id="mineslider" style={{backgroundImage: `url(${bg.src})`}}>
         <div className="container">
@@ -183,7 +183,7 @@ function App({mov}) {
 
             {/*  carousel  */}
             <div className="col-12">
-            <SplideSlider title="ანიმაციური ქართულად" per={6}  rendered={mov.animation} boo={true}/>
+            <SplideSlider title="ანიმაციური ქართულად" per={6}  rendered={mov.animation} boo={false}/>
 
             </div>
             {/*  end carousel  */}

@@ -4,6 +4,15 @@ import "@splidejs/react-splide/css";
 import Link from "next/link";
 import { ArrowL, PlayIcon } from "../icons/icons";
 import Image from "next/image";
+import tv_01 from '../../assets/img/tv/tv-01.png'
+import tv_02 from '../../assets/img/tv/tv-02.png'
+import tv_03 from '../../assets/img/tv/tv-03.png'
+import tv_04 from '../../assets/img/tv/tv-04.png'
+import tv_05 from '../../assets/img/tv/tv-05.png'
+import tv_06 from '../../assets/img/tv/tv-06.png'
+import tv_07 from '../../assets/img/tv/tv-07.png'
+import tv_08 from '../../assets/img/tv/tv-08.png'
+import tv_09 from '../../assets/img/tv/tv-09.png'
 
 function getRatingclassName(rating) {
   if (Number(rating) < 6) return "red";
@@ -288,7 +297,7 @@ export function TvCarousel() {
                   <Image
                     width={40}
                     height={40}
-                    src="/assets/img/tv/tv-01.png"
+                    src={tv_01}
                     alt="ტელევიზია"
                   />
                 </Link>
@@ -303,7 +312,7 @@ export function TvCarousel() {
                   <Image
                     width={40}
                     height={40}
-                    src="/assets/img/tv/tv-02.png"
+                    src={tv_02}
                     alt="ტელევიზია"
                   />
                 </Link>
@@ -318,7 +327,7 @@ export function TvCarousel() {
                   <Image
                     width={40}
                     height={40}
-                    src="/assets/img/tv/tv-03.png"
+                    src={tv_03}
                     alt="ტელევიზია"
                   />
                 </Link>
@@ -333,7 +342,7 @@ export function TvCarousel() {
                   <Image
                     width={40}
                     height={40}
-                    src="/assets/img/tv/tv-04.png"
+                    src={tv_04}
                     alt="ტელევიზია"
                   />
                 </Link>
@@ -348,7 +357,7 @@ export function TvCarousel() {
                   <Image
                     width={40}
                     height={40}
-                    src="/assets/img/tv/tv-05.png"
+                    src={tv_05}
                     alt="ტელევიზია"
                   />
                 </Link>
@@ -363,7 +372,7 @@ export function TvCarousel() {
                   <Image
                     width={40}
                     height={40}
-                    src="/assets/img/tv/tv-06.png"
+                    src={tv_06}
                     alt="ტელევიზია"
                   />
                 </Link>
@@ -378,7 +387,7 @@ export function TvCarousel() {
                   <Image
                     width={40}
                     height={40}
-                    src="/assets/img/tv/tv-07.png"
+                    src={tv_07}
                     alt="ტელევიზია"
                   />
                 </Link>
@@ -393,7 +402,7 @@ export function TvCarousel() {
                   <Image
                     width={40}
                     height={40}
-                    src="/assets/img/tv/tv-08.png"
+                    src={tv_08}
                     alt="ტელევიზია"
                   />
                 </Link>
@@ -408,7 +417,7 @@ export function TvCarousel() {
                   <Image
                     width={40}
                     height={40}
-                    src="/assets/img/tv/tv-09.png"
+                    src={tv_09}
                     alt="ტელევიზია"
                   />
                 </Link>
