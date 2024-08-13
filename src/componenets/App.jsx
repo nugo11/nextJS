@@ -45,7 +45,7 @@ function App({mov}) {
             <div className="col-12">
               <div className="section__title-wrap">
                 <h2 className="section__title" style={{ fontSize: 28 }}>
-                  <Link href="/serial?ser">
+                  <Link href="/movies?ser">
                     <b>
                       <span style={{ color: "#f9ab00" }}>სერ</span>იალები
                     </b>{" "}
@@ -53,7 +53,7 @@ function App({mov}) {
                   </Link>
                 </h2>
                 <Link
-                  href="/serial?ser"
+                  href="/movies?ser"
                   className="section__view section__view--carousel"
                 >
                   ყველას ნახვა
@@ -113,7 +113,7 @@ function App({mov}) {
                       href={
                         tab === "tab-1"
                           ? "serial?genre=თურქული%20სერიალები"
-                          : "/serial?genre=სერიალი%2Cანიმაციური"
+                          : "/movies?genre=სერიალი%2Cანიმაციური"
                       }
                     >
                       ყველას ნახვა

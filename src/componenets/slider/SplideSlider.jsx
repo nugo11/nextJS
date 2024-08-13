@@ -4,15 +4,15 @@ import "@splidejs/react-splide/css";
 import Link from "next/link";
 import { ArrowL, PlayIcon } from "../icons/icons";
 import Image from "next/image";
-import tv_01 from '../../assets/img/tv/tv-01.png'
-import tv_02 from '../../assets/img/tv/tv-02.png'
-import tv_03 from '../../assets/img/tv/tv-03.png'
-import tv_04 from '../../assets/img/tv/tv-04.png'
-import tv_05 from '../../assets/img/tv/tv-05.png'
-import tv_06 from '../../assets/img/tv/tv-06.png'
-import tv_07 from '../../assets/img/tv/tv-07.png'
-import tv_08 from '../../assets/img/tv/tv-08.png'
-import tv_09 from '../../assets/img/tv/tv-09.png'
+import tv_01 from "../../assets/img/tv/tv-01.png";
+import tv_02 from "../../assets/img/tv/tv-02.png";
+import tv_03 from "../../assets/img/tv/tv-03.png";
+import tv_04 from "../../assets/img/tv/tv-04.png";
+import tv_05 from "../../assets/img/tv/tv-05.png";
+import tv_06 from "../../assets/img/tv/tv-06.png";
+import tv_07 from "../../assets/img/tv/tv-07.png";
+import tv_08 from "../../assets/img/tv/tv-08.png";
+import tv_09 from "../../assets/img/tv/tv-09.png";
 
 function getRatingclassName(rating) {
   if (Number(rating) < 6) return "red";
@@ -72,8 +72,7 @@ export default function Slider({ title, per, rendered, boo }) {
                     <div className="item item--hero">
                       <div className="item__cover">
                         <Image
-                          width={180}
-                          height={290}
+                          fill
                           src={`/${item.poster}`}
                           alt={`${item.title_geo} / ${item.title_en} ქართულად`}
                         />
@@ -167,8 +166,7 @@ export function GridMov({ rendered }) {
             <div className="item">
               <div className="item__cover">
                 <Image
-                  width={180}
-                  height={290}
+                  fill
                   src={`/${item.poster}`}
                   alt={`${item.title_geo} / ${item.title_en} ქართულად`}
                 />
@@ -294,12 +292,7 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <Image
-                    width={40}
-                    height={40}
-                    src={tv_01}
-                    alt="ტელევიზია"
-                  />
+                  <Image width={40} height={40} src={tv_01} alt="ტელევიზია" />
                 </Link>
               </div>
             </div>
@@ -309,12 +302,7 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <Image
-                    width={40}
-                    height={40}
-                    src={tv_02}
-                    alt="ტელევიზია"
-                  />
+                  <Image width={40} height={40} src={tv_02} alt="ტელევიზია" />
                 </Link>
               </div>
             </div>
@@ -324,12 +312,7 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <Image
-                    width={40}
-                    height={40}
-                    src={tv_03}
-                    alt="ტელევიზია"
-                  />
+                  <Image width={40} height={40} src={tv_03} alt="ტელევიზია" />
                 </Link>
               </div>
             </div>
@@ -339,12 +322,7 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <Image
-                    width={40}
-                    height={40}
-                    src={tv_04}
-                    alt="ტელევიზია"
-                  />
+                  <Image width={40} height={40} src={tv_04} alt="ტელევიზია" />
                 </Link>
               </div>
             </div>
@@ -354,12 +332,7 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <Image
-                    width={40}
-                    height={40}
-                    src={tv_05}
-                    alt="ტელევიზია"
-                  />
+                  <Image width={40} height={40} src={tv_05} alt="ტელევიზია" />
                 </Link>
               </div>
             </div>
@@ -369,12 +342,7 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <Image
-                    width={40}
-                    height={40}
-                    src={tv_06}
-                    alt="ტელევიზია"
-                  />
+                  <Image width={40} height={40} src={tv_06} alt="ტელევიზია" />
                 </Link>
               </div>
             </div>
@@ -384,12 +352,7 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <Image
-                    width={40}
-                    height={40}
-                    src={tv_07}
-                    alt="ტელევიზია"
-                  />
+                  <Image width={40} height={40} src={tv_07} alt="ტელევიზია" />
                 </Link>
               </div>
             </div>
@@ -399,12 +362,7 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <Image
-                    width={40}
-                    height={40}
-                    src={tv_08}
-                    alt="ტელევიზია"
-                  />
+                  <Image width={40} height={40} src={tv_08} alt="ტელევიზია" />
                 </Link>
               </div>
             </div>
@@ -414,12 +372,7 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <Image
-                    width={40}
-                    height={40}
-                    src={tv_09}
-                    alt="ტელევიზია"
-                  />
+                  <Image width={40} height={40} src={tv_09} alt="ტელევიზია" />
                 </Link>
               </div>
             </div>

@@ -23711,12 +23711,16 @@ body::-webkit-scrollbar-thumb {
     position: relative;
     border-radius: 8px;
     overflow: hidden;
-    background-color: #000
+    background-color: #000;
+    width: 100%;
 }
 
 .item__cover img {
     width: 100%;
-    transition: opacity .4s
+    transition: opacity .4s;
+    object-fit: cover;
+    position: unset !important;
+    height: max-content !important;
 }
 
 .item__cover:hover img {

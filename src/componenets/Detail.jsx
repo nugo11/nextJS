@@ -127,6 +127,16 @@ export default function Detail({ mov, getParam }) {
 
   return (
     <>
+      <head>
+        <div id="fb-root"></div>
+        <script
+          async
+          defer
+          crossorigin="anonymous"
+          src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0&appId=419473549161355"
+          nonce="H1hc4ujB"
+        ></script>
+      </head>
       <div
         className="fullbg"
         style={{ backgroundImage: `url(/mov/${selectedItem.poster})` }}
@@ -639,8 +649,7 @@ export default function Detail({ mov, getParam }) {
                         <Image
                           src={`/${selectedItem.poster}`}
                           alt={`${selectedItem.title_geo} / ${selectedItem.title_en} ქართულად`}
-                          width={180}
-                          height={300}
+                          fill
                         />
                         <span
                           className={`item__rate item__rate--${getRatingClassName(
@@ -756,7 +765,7 @@ export default function Detail({ mov, getParam }) {
                         <div className="comments">
                           <div
                             className="fb-comments"
-                            data-href={`/detail/${params}`}
+                            data-href={`https://filmebi.in/detail/${params}`}
                             data-width="100%"
                             data-numposts="5"
                           ></div>
