@@ -52,7 +52,7 @@ export default function Detail({ mov, getParam }) {
   const handleEdit = async (e) => {
     e.preventDefault();
     const response = await fetch(
-      "https://filmebi.in/CePaSYceBolveNtlegUremPlOULEAu/JKHBAsdbaKLBASDMEoD.php",
+      "https://filmebi.in/api/updateMov",
       {
         method: "POST",
         headers: {
@@ -661,6 +661,7 @@ export default function Detail({ mov, getParam }) {
                           src={`/${selectedItem.poster}`}
                           alt={`${selectedItem.title_geo} / ${selectedItem.title_en} ქართულად`}
                           fill
+                          sizes="100%"
                         />
                         <span
                           className={`item__rate item__rate--${getRatingClassName(

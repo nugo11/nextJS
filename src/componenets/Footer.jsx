@@ -101,8 +101,6 @@ export default function Footer() {
             </div>
           </div>
         </div>
-      <div id="top-ge-counter-container" data-site-id="117515"></div>
-      <script async src="//counter.top.ge/counter.js"></script>
       </div>
     </footer>
   );

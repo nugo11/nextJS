@@ -72,6 +72,7 @@ export default function Slider({ title, per, rendered, boo }) {
             <div className="item__cover">
               <Image
                 fill
+                sizes="100%"
                 src={`/${item.poster}`}
                 alt={`${item.title_geo} / ${item.title_en} ქართულად`}
               />
@@ -160,6 +161,7 @@ export function GridMov({ rendered }) {
               <div className="item__cover">
                 <Image
                   fill
+                  sizes="100%"
                   src={`/${item.poster}`}
                   alt={`${item.title_geo} / ${item.title_en} ქართულად`}
                 />

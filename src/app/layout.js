@@ -43,8 +43,10 @@ export default async function RootLayout({ children }) {
         <AuthProvider>
               <Header />
               {children}
-              <Footer />
+              <Footer />  
         </AuthProvider>
+        <div id="top-ge-counter-container" data-site-id="117515"></div>
+      <script async src="//counter.top.ge/counter.js"></script>
       </body>
     </html>
   );
