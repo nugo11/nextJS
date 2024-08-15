@@ -112,7 +112,7 @@ function App({mov}) {
                   <Link
                       href={
                         tab === "tab-1"
-                          ? "serial?genre=თურქული%20სერიალები"
+                          ? "http://localhost:3000/movies?genre=თურქული+სერიალები"
                           : "/movies?genre=სერიალი%2Cანიმაციური"
                       }
                     >

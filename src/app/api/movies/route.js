@@ -14,7 +14,6 @@ export async function GET(request) {
     const url = new URL(request.url);
     const params = new URLSearchParams(url.search);
 
-    // Query parameters
     const fields = params.get('fields') ? params.get('fields').split(',') : ['*'];
     const poster = params.get('poster');
     const year_from = params.get('year_from');
@@ -41,7 +40,6 @@ export async function GET(request) {
     let sql = `SELECT ${selectedFields} FROM movies WHERE 1=1`;
     const sqlParams = [];
 
-    // Construct the SQL query based on parameters
     if (poster) {
         const posterValues = poster.split(',').map(p => `%${p}%`).join('%\' OR poster LIKE \'%');
         sql += ` AND (poster LIKE ?)`;
@@ -109,30 +107,33 @@ export async function GET(request) {
     sqlParams.push(offset, limit);
 
     try {
-        // Connect to the database
         const conn = await mysql.createConnection(dbConfig);
 
-        // Execute the query
         const [rows] = await conn.execute(sql, sqlParams);
 
-        // Count total results
         let countSql = `SELECT COUNT(*) as total FROM movies WHERE 1=1 ${sql.slice(sql.indexOf('AND'), sql.indexOf('ORDER BY'))}`;
         const [countRows] = await conn.execute(countSql, sqlParams.slice(0, -2));
         const totalArticles = countRows[0].total;
         const totalPages = Math.ceil(totalArticles / limit);
 
-        // Close the connection
         await conn.end();
 
-        // Prepare the response
         const response = {
             articles: rows,
             totalPages,
             currentPage: page,
         };
 
-        // Return the JSON response
-        return NextResponse.json(response, { status: 200 });
+        const headers = new Headers();
+        headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+        headers.set('Pragma', 'no-cache');
+        headers.set('Expires', '0');
+        headers.set('Surrogate-Control', 'no-store');
+
+        return NextResponse.json(response, {
+            status: 200,
+            headers: headers,
+        });
 
     } catch (error) {
         return NextResponse.json({ error: 'Database query failed: ' + error.message }, { status: 500 });

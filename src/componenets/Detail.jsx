@@ -14,6 +14,33 @@ export default function Detail({ mov, getParam }) {
     return <div>Item not found</div>;
   }
 
+  const { id } = selectedItem.id;
+  useEffect(() => {
+    if (id > 1) {
+      updateViewCount(id);
+    }
+  }, [id]);
+
+  const updateViewCount = async (movieId) => {
+    try {
+      const response = await fetch("/api/viewCount", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: movieId }),
+      });
+
+      const data = await response.json();
+      console.log("succesfull update count");
+      if (!data.success) {
+        console.error("Failed to update view count:", data.error);
+      }
+    } catch (error) {
+      console.error("Error updating view count:", error);
+    }
+  };
+
   const [isEditing, setIsEditing] = useState(false);
   const [editedMovie, setEditedMovie] = useState(selectedItem);
 
@@ -127,19 +154,9 @@ export default function Detail({ mov, getParam }) {
 
   return (
     <>
-      <head>
-        <div id="fb-root"></div>
-        <script
-          async
-          defer
-          crossorigin="anonymous"
-          src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0&appId=419473549161355"
-          nonce="H1hc4ujB"
-        ></script>
-      </head>
       <div
         className="fullbg"
-        style={{ backgroundImage: `url(/mov/${selectedItem.poster})` }}
+        style={{ backgroundImage: `url(/${selectedItem.poster})` }}
       ></div>
       <div className="fullbg-pattern" style={{ height: "80%" }}></div>
       <div className="detail-container">
@@ -153,7 +170,7 @@ export default function Detail({ mov, getParam }) {
                     id="content__tabs"
                     role="tablist"
                   >
-                    {selectedItem.movieScriptContent_script.length > 10 ? (
+                    {selectedItem.movieScriptContent_script.length > 10 && (
                       <li className="nav-item" role="presentation">
                         <button
                           id={`0-tab`}
@@ -169,79 +186,76 @@ export default function Detail({ mov, getParam }) {
                           {"სერიალი"}
                         </button>
                       </li>
-                    ) : (
-                      console.error()
                     )}
                     {!selectedItem.movieScriptContent_serial.includes(
                       "movie_box_new"
-                    )
-                      ? selectedItem.movieScriptContent_serial
-                          .replace(/\n/g, "")
-                          .split("</div>")
-                          .filter((item) => item.trim() !== "")
-                          .map((item, index) => {
-                            let buttonText = `ფლეიერი ${index + 1}`;
-                            const isLastIndex =
-                              index ===
-                              selectedItem.movieScriptContent_serial
-                                .replace(/\n/g, "")
-                                .split("</div>")
-                                .filter((item) => item.trim() !== "").length -
-                                1;
-                            const isSecondToLastIndex =
-                              index ===
-                              selectedItem.movieScriptContent_serial
-                                .replace(/\n/g, "")
-                                .split("</div>")
-                                .filter((item) => item.trim() !== "").length -
-                                2;
+                    ) &&
+                      selectedItem.movieScriptContent_serial
+                        .replace(/\n/g, "")
+                        .split("</div>")
+                        .filter((item) => item.trim() !== "")
+                        .map((item, index) => {
+                          let buttonText = `ფლეიერი ${index + 1}`;
+                          const isLastIndex =
+                            index ===
+                            selectedItem.movieScriptContent_serial
+                              .replace(/\n/g, "")
+                              .split("</div>")
+                              .filter((item) => item.trim() !== "").length -
+                              1;
+                          const isSecondToLastIndex =
+                            index ===
+                            selectedItem.movieScriptContent_serial
+                              .replace(/\n/g, "")
+                              .split("</div>")
+                              .filter((item) => item.trim() !== "").length -
+                              2;
 
-                            if (
-                              selectedItem.country.includes("ინგლისურად") &&
-                              selectedItem.country.includes("რუსულად")
-                            ) {
-                              if (isLastIndex) {
-                                buttonText = "რუსულად";
-                              } else if (isSecondToLastIndex) {
-                                buttonText = "ინგლისურად";
-                              }
-                            } else if (
-                              selectedItem.country.includes("ინგლისურად") &&
-                              isLastIndex
-                            ) {
-                              buttonText = "ინგლისურად";
-                            } else if (
-                              selectedItem.country.includes("რუსულად") &&
-                              isLastIndex
-                            ) {
+                          if (
+                            selectedItem.country.includes("ინგლისურად") &&
+                            selectedItem.country.includes("რუსულად")
+                          ) {
+                            if (isLastIndex) {
                               buttonText = "რუსულად";
+                            } else if (isSecondToLastIndex) {
+                              buttonText = "ინგლისურად";
                             }
+                          } else if (
+                            selectedItem.country.includes("ინგლისურად") &&
+                            isLastIndex
+                          ) {
+                            buttonText = "ინგლისურად";
+                          } else if (
+                            selectedItem.country.includes("რუსულად") &&
+                            isLastIndex
+                          ) {
+                            buttonText = "რუსულად";
+                          }
 
-                            return (
-                              <li
-                                className="nav-item"
-                                role="presentation"
-                                key={index}
+                          return (
+                            <li
+                              className="nav-item"
+                              role="presentation"
+                              key={index}
+                            >
+                              <button
+                                id={`${index}-tab`}
+                                className={`${
+                                  count === index ? "active" : "activei"
+                                }`}
+                                data-bs-toggle="tab"
+                                data-bs-target={`#tab-${index}`}
+                                type="button"
+                                role="tab"
+                                aria-controls={`tab-${index}`}
+                                aria-selected="true"
+                                onClick={() => setCount(index)}
                               >
-                                <button
-                                  id={`${index}-tab`}
-                                  className={`${
-                                    count === index ? "active" : "activei"
-                                  }`}
-                                  data-bs-toggle="tab"
-                                  data-bs-target={`#tab-${index}`}
-                                  type="button"
-                                  role="tab"
-                                  aria-controls={`tab-${index}`}
-                                  aria-selected="true"
-                                  onClick={() => setCount(index)}
-                                >
-                                  {buttonText}
-                                </button>
-                              </li>
-                            );
-                          })
-                      : console.error()}
+                                {buttonText}
+                              </button>
+                            </li>
+                          );
+                        })}
                   </ul>
                 </div>
               </div>
@@ -311,7 +325,7 @@ export default function Detail({ mov, getParam }) {
                       }
                     </>
                   )}
-                  {selectedItem.movieScriptContent_script.length > 10 ? (
+                  {selectedItem.movieScriptContent_script.length > 10 && (
                     <div
                       className={`tab-pane fade ${
                         count === 10 ? "show active" : ""
@@ -429,45 +443,42 @@ export default function Detail({ mov, getParam }) {
                         </div>
                       </div>
                     </div>
-                  ) : (
-                    console.error()
                   )}
                   {selectedItem.movieScriptContent_serial &&
-                  !selectedItem.genre.split(", ").includes("სერიალი")
-                    ? selectedItem.movieScriptContent_serial
-                        .replace(/\n/g, "")
-                        .split("</div>")
-                        .filter((item) => item.trim() !== "")
-                        .map((item, index) => (
-                          <div
-                            key={index}
-                            className={`tab-pane fade ${
-                              count === index ||
-                              (count === index &&
-                                !selectedItem.movieScriptContent_script)
-                                ? "show active"
-                                : ""
-                            }`}
-                            id={`tab-${index}`}
-                            role="tabpanel"
-                            aria-labelledby={`${index}-tab`}
-                            tabIndex="0"
-                          >
-                            <div className="row">
-                              <div className="col-12">
-                                {loading ? (
-                                  <span className="loader"></span>
-                                ) : (
-                                  <div
-                                    key={index}
-                                    dangerouslySetInnerHTML={{ __html: item }}
-                                  />
-                                )}
-                              </div>
+                    !selectedItem.genre.split(", ").includes("სერიალი") &&
+                    selectedItem.movieScriptContent_serial
+                      .replace(/\n/g, "")
+                      .split("</div>")
+                      .filter((item) => item.trim() !== "")
+                      .map((item, index) => (
+                        <div
+                          key={index}
+                          className={`tab-pane fade ${
+                            count === index ||
+                            (count === index &&
+                              !selectedItem.movieScriptContent_script)
+                              ? "show active"
+                              : ""
+                          }`}
+                          id={`tab-${index}`}
+                          role="tabpanel"
+                          aria-labelledby={`${index}-tab`}
+                          tabIndex="0"
+                        >
+                          <div className="row">
+                            <div className="col-12">
+                              {loading ? (
+                                <span className="loader"></span>
+                              ) : (
+                                <div
+                                  key={index}
+                                  dangerouslySetInnerHTML={{ __html: item }}
+                                />
+                              )}
                             </div>
                           </div>
-                        ))
-                    : console.error()}
+                        </div>
+                      ))}
                 </div>
               </div>
             </div>
@@ -779,6 +790,14 @@ export default function Detail({ mov, getParam }) {
           </div>
         </section>
       </div>
+      <div id="fb-root"></div>
+      <script
+        async
+        defer
+        crossOrigin="anonymous"
+        src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0&appId=419473549161355"
+        nonce="H1hc4ujB"
+      ></script>
     </>
   );
 }
