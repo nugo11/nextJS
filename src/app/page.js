@@ -3,7 +3,11 @@ import axios from 'axios';
 
 async function fetchAndParse(url) {
   try {
-    const res = await axios.get(url);
+    const res = await axios.get(url, {
+      headers: {
+        'Cache-Control': 'no-store',
+      },
+    });
     return res.data;
   } catch (error) {
     console.error('Failed to fetch or parse data:', error);
