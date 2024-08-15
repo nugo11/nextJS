@@ -49,7 +49,7 @@ export async function generateMetadata({ params }) {
           type: 'image/webp',
         },
       ],
-      url: `https://Filmebi.in/${movie.detailLink}`,
+      url: `https://Filmebi.in/detail/${movie.detailLink}`,
     }
   };
 }
