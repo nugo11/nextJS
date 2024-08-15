@@ -1,6 +1,6 @@
 // src/app/api/sitemap/route.js or sitemap.js (based on your file structure)
 import { NextResponse } from 'next/server';
-import fetchMovieSitemap from './fetchMovieSitemap'; // Adjust the import based on your structure
+import fetchMovieSitemap from '../../../componenets/fetchMovieSitemap'; // Adjust the import based on your structure
 
 export async function GET() {
   const movieUrls = await fetchMovieSitemap();

@@ -1,5 +1,5 @@
 // next-sitemap.config.js
-const fetchMovieSitemap = require('./fetchMovieSitemap');
+const fetchMovieSitemap = require('./src/componenets/fetchMovieSitemap');
 
 module.exports = {
   siteUrl: 'https://filmebi.in', // Your site URL
