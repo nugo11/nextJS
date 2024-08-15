@@ -26,7 +26,7 @@ const AddMovie = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('https://filmebi.in/api/addMovie/post', {
+    const response = await fetch('https://filmebi.in/api/addMovie/posti', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
