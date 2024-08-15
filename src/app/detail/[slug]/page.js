@@ -43,8 +43,10 @@ export async function generateMetadata({ params }) {
       description: movie.story,
       images: [
         {
-          url: `https://Filmebi.in/${movie.poster}`,
+          url: `http://filmebi.in/${movie.poster}`,
+          secure_url: `https://filmebi.in/${movie.poster}`,
           alt: `${movie.title_geo} / ${movie.title_en} ქართულად`,
+          type: 'image/webp',
         },
       ],
       url: `https://Filmebi.in/${movie.detailLink}`,
