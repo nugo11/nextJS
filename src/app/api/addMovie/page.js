@@ -10,7 +10,6 @@ export default function HomePage() {
               <div
                 className="row"
                 style={{
-                  height: 500,
                   display: "grid",
                   placeItems: "center",
                   overflowY: "scroll",

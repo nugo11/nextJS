@@ -1,9 +1,10 @@
 import "../assets/css/main.css";
-import '../assets/css/bpg-glaho-web-caps.css'
+import "../assets/css/bpg-glaho-web-caps.css";
 import { AuthProvider } from "../componenets/login/authcontext";
 import Header from "../componenets/Header";
 import Footer from "../componenets/Footer";
-import icon from '../assets/img/favicon.png'
+import icon from "../assets/img/favicon.png";
+import Script from "next/script";
 
 export const metadata = {
   title:
@@ -33,20 +34,35 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-
   return (
     <html lang="ka" suppressHydrationWarning={true}>
-       <head>
+      <head>
         <link rel="icon" href={icon.src} />
       </head>
       <body>
         <AuthProvider>
-              <Header />
-              {children}
-              <Footer />  
+          <Header />
+          {children}
+          <Footer />
         </AuthProvider>
-        <div id="top-ge-counter-container" data-site-id="117515"></div>
-      <script async src="//counter.top.ge/counter.js"></script>
+        <div style={{ position: "relative" }}>
+          <div
+            id="top-ge-counter-container"
+            data-site-id="117515"
+            style={{
+              position: "absolute",
+              bottom: "50%",
+              left: "50%",
+              transform: 'translate(-50%, -50%)',
+              opacity: 0.4,
+            }}
+          ></div>
+          <Script
+            src="//counter.top.ge/counter.js"
+            strategy="afterInteractive"
+            async
+          />
+        </div>
       </body>
     </html>
   );
