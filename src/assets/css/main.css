@@ -26830,7 +26830,7 @@ body::-webkit-scrollbar-thumb {
 
 .options {
     display: flex;
-    overflow-x: hidden;
+    overflow-x: scroll;
     white-space: nowrap;
     border-radius: 4px;
     padding: 5px;
