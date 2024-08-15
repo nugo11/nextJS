@@ -1,16 +1,12 @@
 // next-sitemap.config.js
-const fetchMovieSitemap = require('./src/componenets/fetchMovieSitemap');
+const fetchMovieSitemap = require('./src/components/fetchMovieSitemap'); // Adjust the path as needed
 
 module.exports = {
-  siteUrl: 'https://filmebi.in', // Your site URL
-  generateRobotsTxt: true, // Optional
-  sitemapSize: 5000, // Adjust if you have many URLs
+  siteUrl: 'https://filmebi.in',
+  generateRobotsTxt: true,
+  sitemapSize: 5000,
   additionalPaths: async (config) => {
     const movieSitemap = await fetchMovieSitemap();
-    return movieSitemap.map(movie => ({
-      loc: movie.loc, // URL
-      changefreq: movie.changefreq, // Frequency of changes
-      priority: movie.priority, // Priority
-    }));
+    return movieSitemap;
   },
 };

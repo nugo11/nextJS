@@ -1,3 +1,4 @@
+// fetchMovieSitemap.js
 import mysql from 'mysql2/promise';
 
 async function fetchMovieSitemap() {
@@ -28,4 +29,4 @@ async function fetchMovieSitemap() {
   }
 }
 
-export default fetchMovieSitemap;
+module.exports = fetchMovieSitemap;
