@@ -14,7 +14,7 @@ export default function Detail({ mov, getParam }) {
     return <div>Item not found</div>;
   }
 
-  const { id } = selectedItem.id;
+  const id = Number(selectedItem.id);
   useEffect(() => {
     if (id > 1) {
       updateViewCount(id);
@@ -23,7 +23,7 @@ export default function Detail({ mov, getParam }) {
 
   const updateViewCount = async (movieId) => {
     try {
-      const response = await fetch("/api/viewCount", {
+      const response = await fetch("https://filmebi.in/api/viewCount", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

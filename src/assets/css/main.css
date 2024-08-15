@@ -23713,13 +23713,18 @@ body::-webkit-scrollbar-thumb {
     overflow: hidden;
     background-color: #000;
     width: 100%;
-    min-height: 250px;
+}
+
+@media (width < 500px) {
+.item_cover {
+    min-height: 300px;
+}
 }
 
 .item__cover img {
     width: 100%;
     transition: opacity .4s;
-    object-fit: cover;
+    object-fit: contain;
     position: unset !important;
     height: max-content !important;
 }
