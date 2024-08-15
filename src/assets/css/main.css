@@ -24727,6 +24727,7 @@ body::-webkit-scrollbar-thumb {
   border-radius: 8px;
   overflow: hidden;
   background-color: #000;
+  width: 100%;
 }
 
 .item__cover img {
