@@ -660,7 +660,8 @@ export default function Detail({ mov, getParam }) {
                         <Image
                           src={`/${selectedItem.poster}`}
                           alt={`${selectedItem.title_geo} / ${selectedItem.title_en} ქართულად`}
-                          fill
+                          width={0}
+                          height={0}
                           sizes="100%"
                         />
                         <span

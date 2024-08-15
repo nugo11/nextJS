@@ -68,8 +68,9 @@ export default function Search({ mov }) {
                     <div className="item">
                       <div className="item__cover">
                         <Image
-                          fill
-                          sizes="100%"
+                           width={0}
+                           height={0}
+                           sizes="100%"
                           src={`/${item.poster}`}
                           alt={`${item.title_geo} / ${item.title_en} ქართულად`}
                         />
