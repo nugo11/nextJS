@@ -191,7 +191,7 @@ function App({mov}) {
         </div>
       </section>
 
-      <section className="section section--border" id="tv-down">
+      <section className="section section--border">
         <div className="container">
           <div className="row">
             {/*  section title  */}
