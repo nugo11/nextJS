@@ -162,9 +162,9 @@ export function GridMov({ rendered }) {
             <div className="item">
               <div className="item__cover">
                 <Image
-                 width={0}
-                 height={0}
-                 sizes="100%"
+                  width={0}
+                  height={0}
+                  sizes="100%"
                   src={`/${item.poster}`}
                   alt={`${item.title_geo} / ${item.title_en} ქართულად`}
                 />
@@ -290,7 +290,13 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <Image width={40} height={40} src={tv_01} alt="ტელევიზია" />
+                  <Image
+                    width={40}
+                    height={40}
+                    src={tv_01}
+                    alt="ტელევიზია"
+                    style={{ minHeight: "40px", maxHeight: 40 }}
+                  />
                 </Link>
               </div>
             </div>
@@ -300,7 +306,13 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <Image width={40} height={40} src={tv_02} alt="ტელევიზია" />
+                  <Image
+                    width={40}
+                    height={40}
+                    src={tv_02}
+                    alt="ტელევიზია"
+                    style={{ minHeight: "40px", maxHeight: 40 }}
+                  />
                 </Link>
               </div>
             </div>
@@ -310,7 +322,13 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <Image width={40} height={40} src={tv_03} alt="ტელევიზია" />
+                  <Image
+                    width={40}
+                    height={40}
+                    src={tv_03}
+                    alt="ტელევიზია"
+                    style={{ minHeight: "40px", maxHeight: 40 }}
+                  />
                 </Link>
               </div>
             </div>
@@ -320,7 +338,13 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <Image width={40} height={40} src={tv_04} alt="ტელევიზია" />
+                  <Image
+                    width={40}
+                    height={40}
+                    src={tv_04}
+                    alt="ტელევიზია"
+                    style={{ minHeight: "40px", maxHeight: 40 }}
+                  />
                 </Link>
               </div>
             </div>
@@ -330,7 +354,13 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <Image width={40} height={40} src={tv_05} alt="ტელევიზია" />
+                  <Image
+                    width={40}
+                    height={40}
+                    src={tv_05}
+                    alt="ტელევიზია"
+                    style={{ minHeight: "40px", maxHeight: 40 }}
+                  />
                 </Link>
               </div>
             </div>
@@ -340,7 +370,13 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <Image width={40} height={40} src={tv_06} alt="ტელევიზია" />
+                  <Image
+                    width={40}
+                    height={40}
+                    src={tv_06}
+                    alt="ტელევიზია"
+                    style={{ minHeight: "40px", maxHeight: 40 }}
+                  />
                 </Link>
               </div>
             </div>
@@ -350,7 +386,13 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <Image width={40} height={40} src={tv_07} alt="ტელევიზია" />
+                  <Image
+                    width={40}
+                    height={40}
+                    src={tv_07}
+                    alt="ტელევიზია"
+                    style={{ minHeight: "40px", maxHeight: 40 }}
+                  />
                 </Link>
               </div>
             </div>
@@ -360,7 +402,13 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <Image width={40} height={40} src={tv_08} alt="ტელევიზია" />
+                  <Image
+                    width={40}
+                    height={40}
+                    src={tv_08}
+                    alt="ტელევიზია"
+                    style={{ minHeight: "40px", maxHeight: 40 }}
+                  />
                 </Link>
               </div>
             </div>
@@ -370,7 +418,13 @@ export function TvCarousel() {
               <div className="item__cover" id="tv_id">
                 {" "}
                 <Link href="/tv">
-                  <Image width={40} height={40} src={tv_09} alt="ტელევიზია" />
+                  <Image
+                    width={40}
+                    height={40}
+                    src={tv_09}
+                    alt="ტელევიზია"
+                    style={{ minHeight: "40px", maxHeight: 40 }}
+                  />
                 </Link>
               </div>
             </div>
