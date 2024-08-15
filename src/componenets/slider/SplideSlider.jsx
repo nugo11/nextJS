@@ -295,7 +295,7 @@ export function TvCarousel() {
                     height={40}
                     src={tv_01}
                     alt="ტელევიზია"
-                    style={{ minHeight: "auto", maxHeight: 'auto' }}
+                    style={{ minHeight: "auto", objectFit: 'contain' }}
                   />
                 </Link>
               </div>
@@ -311,7 +311,7 @@ export function TvCarousel() {
                     height={40}
                     src={tv_02}
                     alt="ტელევიზია"
-                    style={{ minHeight: "auto", maxHeight: 'auto' }}
+                    style={{ minHeight: "auto", objectFit: 'contain' }}
                   />
                 </Link>
               </div>
@@ -327,7 +327,7 @@ export function TvCarousel() {
                     height={40}
                     src={tv_03}
                     alt="ტელევიზია"
-                    style={{ minHeight: "auto", maxHeight: 'auto' }}
+                    style={{ minHeight: "auto", objectFit: 'contain' }}
                   />
                 </Link>
               </div>
@@ -343,7 +343,7 @@ export function TvCarousel() {
                     height={40}
                     src={tv_04}
                     alt="ტელევიზია"
-                    style={{ minHeight: "auto", maxHeight: 'auto' }}
+                    style={{ minHeight: "auto", objectFit: 'contain' }}
                   />
                 </Link>
               </div>
@@ -359,7 +359,7 @@ export function TvCarousel() {
                     height={40}
                     src={tv_05}
                     alt="ტელევიზია"
-                    style={{ minHeight: "auto", maxHeight: 'auto' }}
+                    style={{ minHeight: "auto", objectFit: 'contain' }}
                   />
                 </Link>
               </div>
@@ -375,7 +375,7 @@ export function TvCarousel() {
                     height={40}
                     src={tv_06}
                     alt="ტელევიზია"
-                    style={{ minHeight: "auto", maxHeight: 'auto' }}
+                    style={{ minHeight: "auto", objectFit: 'contain' }}
                   />
                 </Link>
               </div>
@@ -391,7 +391,7 @@ export function TvCarousel() {
                     height={40}
                     src={tv_07}
                     alt="ტელევიზია"
-                    style={{ minHeight: "auto", maxHeight: 'auto' }}
+                    style={{ minHeight: "auto", objectFit: 'contain' }}
                   />
                 </Link>
               </div>
@@ -407,7 +407,7 @@ export function TvCarousel() {
                     height={40}
                     src={tv_08}
                     alt="ტელევიზია"
-                    style={{ minHeight: "auto", maxHeight: 'auto' }}
+                    style={{ minHeight: "auto", objectFit: 'contain' }}
                   />
                 </Link>
               </div>
@@ -423,7 +423,7 @@ export function TvCarousel() {
                     height={40}
                     src={tv_09}
                     alt="ტელევიზია"
-                    style={{ minHeight: "auto", maxHeight: 'auto' }}
+                    style={{ minHeight: "auto", objectFit: 'contain' }}
                   />
                 </Link>
               </div>
