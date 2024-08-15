@@ -62,87 +62,89 @@ export default function Slider({ title, per, rendered, boo }) {
         </button>
       </div>
       <SplideTrack>
-      {rendered &&
-  rendered
-    .filter((i) => (boo ? !i.genre.includes("სერიალი") : i))
-    .map((item) => {
-      return (
-        <SplideSlide key={item.detailLink}> {/* Add key prop here */}
-          <div className="item item--hero">
-            <div className="item__cover">
-              <Image
-                fill
-                sizes="100%"
-                src={`/${item.poster}`}
-                alt={`${item.title_geo} / ${item.title_en} ქართულად`}
-              />
+        {rendered &&
+          rendered
+            .filter((i) => (boo ? !i.genre.includes("სერიალი") : i))
+            .map((item) => {
+              return (
+                <SplideSlide key={item.detailLink}>
+                  {" "}
+                  {/* Add key prop here */}
+                  <div className="item item--hero">
+                    <div className="item__cover">
+                      <Image
+                        width={0}
+                        height={0}
+                        sizes="100%"
+                        src={`/${item.poster}`}
+                        alt={`${item.title_geo} / ${item.title_en} ქართულად`}
+                      />
 
-              <Link
-                key={item.detailLink} // key here is redundant because it's already provided on SplideSlide
-                href={`/detail/${item.detailLink}`}
-                className="item__play"
-              >
-                <PlayIcon />
-              </Link>
-              <span
-                className={`item__rate item__rate--${getRatingclassName(
-                  item.imdb
-                )}`}
-              >
-                {item.imdb}
-              </span>
-              <div className="item__favorite" type="button">
-                HD
-              </div>
-              <div className="item__lang" type="button">
-                <ul>
-                  <li
-                    style={{
-                      color: item.country.includes("ქართულად")
-                        ? "white"
-                        : "gray",
-                    }}
-                  >
-                    GEO
-                  </li>
-                  <li
-                    style={{
-                      color: item.country.includes("ინგლისურად")
-                        ? "white"
-                        : "gray",
-                    }}
-                  >
-                    ENG
-                  </li>
-                  <li
-                    style={{
-                      color: item.country.includes("რუსულად")
-                        ? "white"
-                        : "gray",
-                    }}
-                  >
-                    RUS
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="item__content">
-              <h3 className="item__title">
-                <Link href={`/detail/${item.detailLink}`}>
-                  {item.title_geo}
-                </Link>
-              </h3>
-              <span className="item__category">
-                <Link href={`/detail/${item.detailLink}`}>
-                  {item.title_en}
-                </Link>
-              </span>
-            </div>
-          </div>
-        </SplideSlide>
-      );
-    })}
-
+                      <Link
+                        key={item.detailLink} // key here is redundant because it's already provided on SplideSlide
+                        href={`/detail/${item.detailLink}`}
+                        className="item__play"
+                      >
+                        <PlayIcon />
+                      </Link>
+                      <span
+                        className={`item__rate item__rate--${getRatingclassName(
+                          item.imdb
+                        )}`}
+                      >
+                        {item.imdb}
+                      </span>
+                      <div className="item__favorite" type="button">
+                        HD
+                      </div>
+                      <div className="item__lang" type="button">
+                        <ul>
+                          <li
+                            style={{
+                              color: item.country.includes("ქართულად")
+                                ? "white"
+                                : "gray",
+                            }}
+                          >
+                            GEO
+                          </li>
+                          <li
+                            style={{
+                              color: item.country.includes("ინგლისურად")
+                                ? "white"
+                                : "gray",
+                            }}
+                          >
+                            ENG
+                          </li>
+                          <li
+                            style={{
+                              color: item.country.includes("რუსულად")
+                                ? "white"
+                                : "gray",
+                            }}
+                          >
+                            RUS
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div className="item__content">
+                      <h3 className="item__title">
+                        <Link href={`/detail/${item.detailLink}`}>
+                          {item.title_geo}
+                        </Link>
+                      </h3>
+                      <span className="item__category">
+                        <Link href={`/detail/${item.detailLink}`}>
+                          {item.title_en}
+                        </Link>
+                      </span>
+                    </div>
+                  </div>
+                </SplideSlide>
+              );
+            })}
       </SplideTrack>
     </Splide>
   );
@@ -160,8 +162,9 @@ export function GridMov({ rendered }) {
             <div className="item">
               <div className="item__cover">
                 <Image
-                  fill
-                  sizes="100%"
+                 width={0}
+                 height={0}
+                 sizes="100%"
                   src={`/${item.poster}`}
                   alt={`${item.title_geo} / ${item.title_en} ქართულად`}
                 />
