@@ -68,8 +68,9 @@ export async function GET(request) {
     }
 
     if (detailLink) {
-        sql += ` AND detailLink LIKE ?`;
-        sqlParams.push(`%${detailLink}%`);
+        const detailLinkConditions = detailLink.split(',').map(dl => `detailLink LIKE ?`).join(' OR ');
+        sql += ` AND (${detailLinkConditions})`;
+        sqlParams.push(...detailLink.split(',').map(dl => `%${dl.trim()}%`));
     }
 
     if (actors) {
