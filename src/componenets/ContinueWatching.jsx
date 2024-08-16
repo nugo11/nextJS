@@ -23,7 +23,7 @@ export function fetchMoviesData() {
     );
 
   return {
-    savedMovies: savedMovies.articles,
+    savedMovies: savedMovies.articles || 'nugo',
   };
 }
 
