@@ -1,5 +1,6 @@
 import App from "../componenets/App";
 import axios from 'axios';
+export const dynamic = 'force-dynamic';
 
 async function fetchAndParse(url) {
   try {
