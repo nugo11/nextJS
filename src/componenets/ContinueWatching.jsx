@@ -23,11 +23,11 @@ export function fetchMoviesData() {
     );
 
   return {
-    savedMovies: savedMovies.articles || 'nugo',
+    savedMovies: savedMovies,
   };
 }
 
 export default function ContinueWatching() {
   const data = fetchMoviesData();
-  return data.savedMovies.map(item => item.title_en);
+  return console.log(data);
 }
