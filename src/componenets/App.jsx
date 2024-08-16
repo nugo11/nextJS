@@ -50,26 +50,28 @@ function App({ mov }) {
         </div>
       </section>
 
-      {JSON.parse(localStorage.getItem("storedMovies")) &&
-        JSON.parse(localStorage.getItem("storedMovies")).length >= 1 && (
-          <section className="section section--border">
-            <div className="container">
-              <div className="row">
-                <div className="col-12">
-                  <div className="section__title-wrap">
-                    <h3 className="section__title" style={{ fontSize: 28 }}>
-                      <b>განაგრძე</b> ყურება
-                    </h3>
+      {useEffect(() => {
+        JSON.parse(localStorage.getItem("storedMovies")) &&
+          JSON.parse(localStorage.getItem("storedMovies")).length >= 1 && (
+            <section className="section section--border">
+              <div className="container">
+                <div className="row">
+                  <div className="col-12">
+                    <div className="section__title-wrap">
+                      <h3 className="section__title" style={{ fontSize: 28 }}>
+                        <b>განაგრძე</b> ყურება
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div className="col-12">
+                    <ContinueWatching />
                   </div>
                 </div>
-
-                <div className="col-12">
-                  <ContinueWatching />
-                </div>
               </div>
-            </div>
-          </section>
-        )}
+            </section>
+          );
+      }, [])}
 
       <section className="section section--border">
         <div className="container">
