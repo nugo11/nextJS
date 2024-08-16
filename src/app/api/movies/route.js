@@ -126,6 +126,9 @@ export async function GET(request) {
         };
 
         const headers = new Headers();
+        headers.set('Access-Control-Allow-Origin', '*'); // Allow requests from any origin
+        headers.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        headers.set('Access-Control-Allow-Headers', 'Content-Type');    
         headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
         headers.set('Pragma', 'no-cache');
         headers.set('Expires', '0');
