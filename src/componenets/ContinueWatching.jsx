@@ -1,8 +1,8 @@
 import axios from "axios";
 
-function fetchAndParse(url) {
+async function fetchAndParse(url) {
   try {
-    const res = axios.get(url);
+    const res = await axios.get(url);
     return res.data;
   } catch (error) {
     console.error("Failed to fetch or parse data:", error);
@@ -10,11 +10,11 @@ function fetchAndParse(url) {
   }
 }
 
-export function fetchMoviesData() {
+export async function fetchMoviesData() {
   const baseUrl = "https://filmebi.in/api/movies";
   const savedMovies =
     JSON.parse(localStorage.getItem("storedMovies")).length >= 1 &&
-    fetchAndParse(
+    await fetchAndParse(
       `${baseUrl}?detailLink=${localStorage
         .getItem("storedMovies")
         .replaceAll('"', "")
@@ -27,7 +27,7 @@ export function fetchMoviesData() {
   };
 }
 
-export default function ContinueWatching() {
-  const data = fetchMoviesData();
+export default async function ContinueWatching() {
+  const data = await fetchMoviesData();
   return console.log(data);
 }
