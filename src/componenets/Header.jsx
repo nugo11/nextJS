@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { signOut } from "firebase/auth";
@@ -38,6 +38,14 @@ export default function Header() {
     }
     setChange("");
   };
+
+  // savemovies
+  useEffect(() => {
+    const checkStoreMovie = localStorage.getItem('storedMovies');
+    if(!checkStoreMovie) {
+      localStorage.setItem('storedMovies', [])
+    }
+  }, [])
 
   return (
     <>

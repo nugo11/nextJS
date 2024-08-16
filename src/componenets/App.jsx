@@ -1,13 +1,13 @@
-"use client"
-import { useState } from "react";
+"use client";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import SplideSlider, { GridMov, TvCarousel } from "./slider/SplideSlider";
-import Pattern from '../assets/img/bg_pattern.png'
-import bg from '../assets/img/home-bg.webp'
-import animationBg from '../assets/img/animation-bg.webp'
+import Pattern from "../assets/img/bg_pattern.png";
+import bg from "../assets/img/home-bg.webp";
+import animationBg from "../assets/img/animation-bg.webp";
+import ContinueWatching from "./ContinueWatching";
 
-
-function App({mov}) {
+function App({ mov }) {
   const [tab, setTab] = useState("tab-1");
 
   const handleTabClick = (tabId) => {
@@ -16,8 +16,15 @@ function App({mov}) {
 
   return (
     <>
-      <div className="fullbg-pattern" style={{backgroundImage: `url(${Pattern.src})`}}></div>
-      <section className="home" id="mineslider" style={{backgroundImage: `url(${bg.src})`}}>
+      <div
+        className="fullbg-pattern"
+        style={{ backgroundImage: `url(${Pattern.src})` }}
+      ></div>
+      <section
+        className="home"
+        id="mineslider"
+        style={{ backgroundImage: `url(${bg.src})` }}
+      >
         <div className="container">
           <div className="row">
             <div className="col-12">
@@ -32,11 +39,37 @@ function App({mov}) {
             </div>
 
             <div className="col-12">
-              <SplideSlider title="ფილმები ქართულად" per={6}  rendered={mov.movSlider} boo={true}/>
+              <SplideSlider
+                title="ფილმები ქართულად"
+                per={6}
+                rendered={mov.movSlider}
+                boo={true}
+              />
             </div>
           </div>
         </div>
       </section>
+
+      {JSON.parse(localStorage.getItem("storedMovies")) &&
+        JSON.parse(localStorage.getItem("storedMovies")).length >= 1 && (
+          <section className="section section--border">
+            <div className="container">
+              <div className="row">
+                <div className="col-12">
+                  <div className="section__title-wrap">
+                    <h3 className="section__title" style={{ fontSize: 28 }}>
+                      <b>განაგრძე</b> ყურება
+                    </h3>
+                  </div>
+                </div>
+
+                <div className="col-12">
+                  <ContinueWatching />
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
 
       <section className="section section--border">
         <div className="container">
@@ -64,7 +97,12 @@ function App({mov}) {
 
             {/*  carousel  */}
             <div className="col-12">
-            <SplideSlider title="სერიალები ქართულად" per={6}  rendered={mov.ser} boo={false}/>
+              <SplideSlider
+                title="სერიალები ქართულად"
+                per={6}
+                rendered={mov.ser}
+                boo={false}
+              />
             </div>
             {/*  end carousel  */}
           </div>
@@ -90,7 +128,7 @@ function App({mov}) {
                     role="tablist"
                   >
                     <li className="nav-item" role="presentation">
-                    <button
+                      <button
                         id="1-tab"
                         className={tab === "tab-1" ? "active" : ""}
                         onClick={() => handleTabClick("tab-1")}
@@ -109,7 +147,7 @@ function App({mov}) {
                     </li>
                   </ul>
                   <ul className="viewallul">
-                  <Link
+                    <Link
                       href={
                         tab === "tab-1"
                           ? "http://localhost:3000/movies?genre=თურქული+სერიალები"
@@ -128,9 +166,9 @@ function App({mov}) {
         <div className="container">
           <div className="tab-content">
             <div
-             className={`tab-pane fade ${
-              tab === "tab-1" ? "show active" : ""
-            }`}
+              className={`tab-pane fade ${
+                tab === "tab-1" ? "show active" : ""
+              }`}
               id="tab-1"
               role="tabpanel"
               aria-labelledby="1-tab"
@@ -141,23 +179,27 @@ function App({mov}) {
               </div>
             </div>
             <div
-            className={`tab-pane fade ${
-              tab === "tab-2" ? "show active" : ""
-            }`}
+              className={`tab-pane fade ${
+                tab === "tab-2" ? "show active" : ""
+              }`}
               id="tab-2"
               role="tabpanel"
               aria-labelledby="2-tab"
               tabIndex="0"
             >
               <div className="row">
-              <GridMov rendered={mov.anime} />
+                <GridMov rendered={mov.anime} />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="section section--border" id="sabavshvobg" style={{backgroundImage: `url(${animationBg.src})`}}>
+      <section
+        className="section section--border"
+        id="sabavshvobg"
+        style={{ backgroundImage: `url(${animationBg.src})` }}
+      >
         <div className="container">
           <div className="row">
             {/*  section title  */}
@@ -183,8 +225,12 @@ function App({mov}) {
 
             {/*  carousel  */}
             <div className="col-12">
-            <SplideSlider title="ანიმაციური ქართულად" per={6}  rendered={mov.animation} boo={false}/>
-
+              <SplideSlider
+                title="ანიმაციური ქართულად"
+                per={6}
+                rendered={mov.animation}
+                boo={false}
+              />
             </div>
             {/*  end carousel  */}
           </div>
@@ -209,7 +255,7 @@ function App({mov}) {
 
             {/*  carousel  */}
             <div className="col-12">
-             <TvCarousel />
+              <TvCarousel />
             </div>
             {/*  end carousel  */}
           </div>
