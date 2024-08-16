@@ -16,7 +16,7 @@ export async function fetchMoviesData(param) {
   const baseUrl =
     "https://filmebi.in/api/movies";
   const movies = await fetchAndParse(
-    `${baseUrl}?limit=42&fields=title_geo,title_en,detailLink,year,imdb,detailLink,country,genre,poster&${queryString}`
+    `${baseUrl}?limit=42&fields=title_geo,title_en,detailLink,year,imdb,country,genre,poster&${queryString}`
   );
 
   return {
