@@ -50,7 +50,7 @@ function App({ mov }) {
         </div>
       </section>
 
-      {/* {JSON.parse(localStorage.getItem("storedMovies")) &&
+      {JSON.parse(localStorage.getItem("storedMovies")) &&
         JSON.parse(localStorage.getItem("storedMovies")).length >= 1 && (
           <section className="section section--border">
             <div className="container">
@@ -69,7 +69,7 @@ function App({ mov }) {
               </div>
             </div>
           </section>
-        )} */}
+        )}
 
       <section className="section section--border">
         <div className="container">

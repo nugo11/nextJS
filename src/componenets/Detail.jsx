@@ -76,18 +76,20 @@ export default function Detail({ mov, getParam }) {
   );
   const [loading, setLoading] = useState(true);
 
-    // store movies
-    useEffect(() => {
-      const getItemFromStorage = localStorage.getItem('storedMovies');
-      const storedMoviesArr = !getItemFromStorage ? [] : JSON.parse(getItemFromStorage);
-
-      if (!storedMoviesArr.includes(selectedItem.detailLink)) {
-        storedMoviesArr.push(selectedItem.detailLink);
+  useEffect(() => {
+    const getItemFromStorage = localStorage.getItem('storedMovies');
+    let storedMoviesArr = !getItemFromStorage ? [] : JSON.parse(getItemFromStorage);
+  
+    if (!storedMoviesArr.includes(selectedItem.detailLink)) {
+      if (storedMoviesArr.length >= 6) {
+        storedMoviesArr.shift(); 
       }
-    
-      localStorage.setItem('storedMovies', JSON.stringify(storedMoviesArr));
-
-    }, [selectedItem])
+      storedMoviesArr.push(selectedItem.detailLink); 
+    }
+  
+    localStorage.setItem('storedMovies', JSON.stringify(storedMoviesArr));
+  }, [selectedItem]);
+  
 
   useEffect(() => {
     const timer = setTimeout(() => {
