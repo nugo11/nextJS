@@ -14,7 +14,7 @@ export default function ContinueWatching({movData}) {
                 <div className="cont_item">
                   <div className="item__cover">
                     <Image
-                      src={`/${item.title_geo}`}
+                      src={`/${item.poster}`}
                       alt={`${item.title_geo} / ${item.title_en} ქართულად`}
                       width={250}
                       height={150}
