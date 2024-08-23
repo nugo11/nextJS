@@ -39,14 +39,6 @@ export default function Header() {
     setChange("");
   };
 
-  // savemovies
-  useEffect(() => {
-    const checkStoreMovie = localStorage.getItem('storedMovies');
-    if(!checkStoreMovie) {
-      localStorage.setItem('storedMovies', [])
-    }
-  }, [])
-
   return (
     <>
       <header className="header">

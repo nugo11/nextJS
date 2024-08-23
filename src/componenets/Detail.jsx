@@ -77,18 +77,38 @@ export default function Detail({ mov, getParam }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const getItemFromStorage = localStorage.getItem('storedMovies');
-    let storedMoviesArr = !getItemFromStorage ? [] : JSON.parse(getItemFromStorage);
+    const cookies = document.cookie.split(';').reduce((acc, cookie) => {
+      const [name, value] = cookie.split('=').map(c => c.trim());
+      acc[name] = value ? decodeURIComponent(value) : '';
+      return acc;
+    }, {});
   
-    if (!storedMoviesArr.includes(selectedItem.detailLink)) {
-      if (storedMoviesArr.length >= 6) {
-        storedMoviesArr.shift(); 
-      }
-      storedMoviesArr.push(selectedItem.detailLink); 
+    const storedMoviesArr = cookies['storedMovies'] ? JSON.parse(cookies['storedMovies']) : [];
+    
+    const newItem = {
+      detailLink: selectedItem.detailLink,
+    };
+    
+    const existingIndex = storedMoviesArr.findIndex(item => item.detailLink === selectedItem.detailLink);
+    
+    if (existingIndex !== -1) {
+      storedMoviesArr.splice(existingIndex, 1);
     }
   
-    localStorage.setItem('storedMovies', JSON.stringify(storedMoviesArr));
+    if (storedMoviesArr.length >= 6) {
+      storedMoviesArr.shift(); 
+    }
+    
+    storedMoviesArr.push(newItem); 
+    
+    const expireDate = new Date();
+    expireDate.setTime(expireDate.getTime() + (3 * 24 * 60 * 60 * 1000));
+  
+    document.cookie = `storedMovies=${encodeURIComponent(JSON.stringify(storedMoviesArr))}; expires=${expireDate.toUTCString()}; path=/`;
   }, [selectedItem]);
+  
+  
+  
   
 
   useEffect(() => {

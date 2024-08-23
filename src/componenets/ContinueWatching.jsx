@@ -1,67 +1,41 @@
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function ContinueWatching() {
-  const [movies, setMovies] = useState([]);
+export default function ContinueWatching({movData}) {
+    
 
-  useEffect(() => {
-    const storedMovies = localStorage.getItem("storedMovies");
-
-    if (storedMovies) {
-      const movieIds = storedMovies
-        .replaceAll('"', "")
-        .replace("[", "")
-        .replace("]", "");
-
-      fetch(
-        `https://filmebi.in/api/movies?detailLink=${movieIds}&fields=title_geo,title_en,detailLink,poster`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          const reversedMovies = data.articles.reverse();
-          setMovies(reversedMovies);
-        })
-        .catch((error) => {
-          console.error("Error fetching movies:", error);
-        });
-    }
-  }, []);
-
-
-  
   return (
     <>
       <div className="contWatch">
-        {movies &&
-          movies.map((item) => {
+        {movData &&
+          movData.map((item) => {
             return (
               <>
                 <div className="cont_item">
-                  <div class="item__cover">
+                  <div className="item__cover">
                     <Image
-                      src={`${item.poster}`}
+                      src={`/${item.title_geo}`}
                       alt={`${item.title_geo} / ${item.title_en} ქართულად`}
                       width={250}
                       height={150}
                     />
 
                     <Link
-                      class="item__play"
+                      className="item__play"
                       href={`/detail/${item.detailLink}`}
                     >
                       <i>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          class="icon icon-tabler icon-tabler-player-play-filled"
+                          className="icon icon-tabler icon-tabler-player-play-filled"
                           width="28"
                           height="28"
                           viewBox="0 0 24 24"
-                          stroke-width="1.5"
+                          strokeWidth="1.5"
                           stroke="#fff"
                           fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
                           <path
                             stroke="none"
@@ -70,7 +44,7 @@ export default function ContinueWatching() {
                           ></path>
                           <path
                             d="M6 4v16a1 1 0 0 0 1.524 .852l13 -8a1 1 0 0 0 0 -1.704l-13 -8a1 1 0 0 0 -1.524 .852z"
-                            stroke-width="0"
+                            strokeWidth="0"
                             fill="currentColor"
                           ></path>
                         </svg>

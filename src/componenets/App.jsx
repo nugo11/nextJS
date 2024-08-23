@@ -50,26 +50,31 @@ function App({ mov }) {
         </div>
       </section>
 
-      {/* {JSON.parse(localStorage.getItem("storedMovies")) &&
-        JSON.parse(localStorage.getItem("storedMovies")).length >= 1 && (
+      {mov.storedMov ? (
+        mov.storedMov.length >= 1 ? (
           <section className="section section--border">
             <div className="container">
               <div className="row">
                 <div className="col-12">
                   <div className="section__title-wrap">
                     <h3 className="section__title" style={{ fontSize: 28 }}>
-                      <b>განაგრძე</b> ყურება
+                      <b><span style={{ color: "#f9ab00" }}>გან</span>აგრძე</b> ყურება
                     </h3>
                   </div>
                 </div>
 
                 <div className="col-12">
-                  <ContinueWatching />
+                  <ContinueWatching movData={mov.storedMov} />
                 </div>
               </div>
             </div>
           </section>
-        )} */}
+        ) : (
+          console.log("meore")
+        )
+      ) : (
+        console.log("pirveli")
+      )}
 
       <section className="section section--border">
         <div className="container">
