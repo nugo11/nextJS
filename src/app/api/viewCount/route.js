@@ -7,9 +7,9 @@ export async function POST(req) {
 
         const connection = await mysql.createConnection({
             host: 'localhost',
-            user: 'filmebi_all',
+            user: 'nugo_all',
             password: 'Leopardi.1234',
-            database: 'filmebi_all',
+            database: 'nugo_all',
         });
 
         const [result] = await connection.execute(

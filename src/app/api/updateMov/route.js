@@ -3,9 +3,9 @@ import mysql from "mysql2/promise";
 
 const dbConfig = {
   host: "localhost",
-  user: "filmebi_all",
+  user: "nugo_all",
   password: "Leopardi.1234",
-  database: "filmebi_all",
+  database: "nugo_all",
 };
 
 export async function POST(req) {
