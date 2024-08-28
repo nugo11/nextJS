@@ -3,7 +3,7 @@ import mysql from 'mysql2/promise';
 
 // Database connection
 const dbConfig = {
-    host: 'srv579531.hstgr.cloud',
+    host: 'localhost',
     user: 'nugo_all',
     password: 'Leopardi.1234',
     database: 'nugo_all',
