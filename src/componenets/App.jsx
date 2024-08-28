@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import SplideSlider, { GridMov, TvCarousel } from "./slider/SplideSlider";
 import Pattern from "../assets/img/bg_pattern.png";
@@ -13,6 +13,8 @@ function App({ mov }) {
   const handleTabClick = (tabId) => {
     setTab(tabId);
   };
+
+  console.log(mov)
 
   return (
     <>
@@ -70,7 +72,7 @@ function App({ mov }) {
             </div>
           </section>
         ) : (
-          console.log("meore")
+          console.log("saved movies not found")
         )
       ) : (
         console.log("pirveli")

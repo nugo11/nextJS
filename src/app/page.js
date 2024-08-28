@@ -18,7 +18,7 @@ async function fetchAndParse(url) {
 }
 
 async function fetchMoviesData() {
-  const baseUrl = "https://filmebi.in/api/movies";
+  const baseUrl = "http://filmebi.in/api/movies";
 
   const cookieStore = cookies();
   const storedMovies = cookieStore.get('storedMovies')?.value;
